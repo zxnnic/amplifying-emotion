@@ -1,21 +1,17 @@
-# Quantization and Amplification of Happiness in Animated Faces
-a CSC2521 Facial Animation Project
+# CSC2521 Facial Animation Final Project
+The project aims to develop a method for amplifying visible emotion expression in recorded videos of real humans onto animated human faces. Previous work done in animating emotions focus on distinct expressions of a single emotion over time, rarely looking at the progression of an emotion in terms of intensity. We want to explore if it is possible to identify quantifiable levels of expressed emotions on human faces and how they would map on a timeline. This project uses existing facial mapping methodologies (e.g. MediaPipe1, Apple's ARKit2) for facial landmark detection and Facial Action Coding Units [1] (FACS) based action units (AU) identification. The project will explore the discrete quantizable levels of happiness, which is one of the six basic emotion.
 
-## Introduction
+### Code layout
 
-## Related Works
+All the code files are located in the `code` folder. There are several components to the code and they include
 
-## Methodology
+- `mean_au_analysis`: Analysis FACS curve and generation of generalized values for AU activation values 
+- `maya_ar`: Code snippets used to animate ValleyGirl and AppleFace
+- `data`: CSV files extracted from ARKit for blendshape values
 
-## Data Collection
+### Usage
 
-## Data Analysis
+Under construction
 
-## Evaluation
+### References
 
-## Discussion
-summary on contribution
-
-future work
-
-## Conclusion
