@@ -4,8 +4,12 @@ from os.path import isfile, join
 
 import seaborn as sns
 import matplotlib.pyplot as plt
+import statistics as stat
+import math
 
 DATA_PATH = "./"
+STUDY_DATA = "study_data.csv"
+NUM_QUESTIONS = 12
 
 pd.options.display.float_format = "{:,.2f}".format
 
@@ -14,13 +18,6 @@ def load_data(fname, study_codes):
     df.replace(study_codes,inplace=True)
     df.dropna(axis=1, how='all', inplace=True)
 
-    # drop_col_names = ['Select the face that looks happier:.'+str(n) for n in range(1,31)]
-    # drop_col_names += ['Timestamp', 'Select the face that looks happier:', 'Score', 'Email Address']
-    # drop_col_names = ['Timestamp']
-    # print(df.columns)
-    # for col in drop_col_names:
-    #     if col in df.columns:
-    #         df.drop(index=col, axis=1, inplace=True)
     return df
 
 def load_study_codes():
@@ -34,20 +31,29 @@ def load_study_codes():
     return study_codes
     
 def plot_violin(data):
-    sns.violinplot(data=data,palette='hls',width=0.2)
+    print('{:7}{:>6}{:>6}'.format('','AMP','LIN'))  
+    print('{:7}{:6.2}{:6.2}'.format('mean', stat.mean(data['AMP']), stat.mean(data['LIN'])))
+    print('{:7}{:6.2}{:6.2}'.format('median', stat.median(data['AMP']), stat.median(data['LIN'])))
+    print('{:7}{:6.2}{:6.2}'.format('std', stat.stdev(data['AMP']), stat.stdev(data['LIN'])))
+
+    sns.violinplot(data=data,palette='hls',width=0.5)
     plt.show()
 
+def plot_boxplot(data):
+    sns.boxplot(data=data,palette='hls',width=0.2)
+    plt.show()
 
 if __name__ == "__main__":
     study_codes = load_study_codes()
-    data = load_data("study_data.csv", study_codes)
+    data = load_data(STUDY_DATA, study_codes)
     # get the preferences overall
     print('Preference based on realism overall')
-    total_count = data.apply(pd.Series.value_counts, axis=0).sum(axis=1)
-    print(total_count)
+    total_count = data.apply(pd.Series.value_counts, axis=0)
+    total_count.to_csv("output_per_question_preferences.csv")
     print()
     # get preferences by person
-    person_count = data.apply(pd.Series.value_counts, axis=1).divide(12)
-    person_count.to_csv('output_person_ratio.csv')
+    person_count = data.apply(pd.Series.value_counts, axis=1).divide(NUM_QUESTIONS)
+    person_count = person_count.sort_values(by='AMP', ascending=False)
+    person_count.to_csv('output_person_ratio_decrease.csv')
     # plot the mean
     plot_violin(person_count)
