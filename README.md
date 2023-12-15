@@ -9,6 +9,7 @@ All the code files are located in the `code` folder. There are several component
 - `mean_au_analysis`: Analysis FACS curve and generation of generalized values for AU activation values 
 - `maya_snippets`: Code snippets used to animate ValleyGirl and AppleFace
 - `data`: CSV files extracted from ARKit for blendshape values
+- `perceptual_study`: Results and analysis of our two perceptual study
 
 ### References
 [1] Ekman, P., & Friesen, W. V. (1978). Facial Action Coding System (FACS) [Database record]. APA PsycTests. DOI: 10.1037/t27734-000 
