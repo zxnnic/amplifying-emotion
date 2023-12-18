@@ -166,7 +166,7 @@ mean = pd.read_csv(meanAU_path)
 mean = mean.drop(columns = ['Timecode', 'BlendshapeCount'])
 
 # Read target video's ARKit blendshapes.
-neutral_path = r"./inputs/nicole_neutral.csv"
+neutral_path = r"./inputs/nicole_neutral_long.csv"
 neutral = pd.read_csv(neutral_path)
 for col in neutral.columns:
   if col.lower() not in KNOWN_AUS:
@@ -176,8 +176,8 @@ for col in neutral.columns:
 control_dict = detect_sentiment(PHRASE)
 
 # Apply amplification using our method "amp" or naive baseline "lin".
-amplified_AMP = amplify(mean, neutral, mode="amp", control_dict={0:0, 100:4})
-amplified_LIN = amplify(mean, neutral, mode="lin", control_dict={0:0, 100:4})
+amplified_AMP = amplify(mean, neutral, mode="amp", control_dict={0:0, 35:3, 60:0, 100:4})
+amplified_LIN = amplify(mean, neutral, mode="lin", control_dict={0:0, 35:3, 60:0, 100:4})
 
-amplified_AMP.to_csv("./outputs/nicole_neutral_AMP.csv", index=False)
-amplified_LIN.to_csv("./outputs/nicole_neutral_LIN.csv", index=False)
+amplified_AMP.to_csv("./outputs/nicole_long_neutral_AMP.csv", index=False)
+amplified_LIN.to_csv("./outputs/nicole_long_neutral_LIN.csv", index=False)
