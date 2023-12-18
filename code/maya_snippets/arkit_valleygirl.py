@@ -1,5 +1,5 @@
 import json
-data_path = r"D:\Grad\Courses\CSC2521\data_talking\happy\p2_goodday_neutral\MySlate_17_iPhone.csv"
+data_path = r"D:\Grad\Courses\CSC2521\amplifying_emotion\code\maya_snippets\outputs\p2_goodday_neutral.csv"
 
 ADJUST_VALLEYGIRL = ["mouthstretchright", "mouthstretchleft", "mouthlowerdownright", "mouthlowerdownleft", "mouthupperupright", "mouthupperupleft"]
 

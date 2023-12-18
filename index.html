@@ -13,7 +13,7 @@
     <!--JQuery, Popper, Bootstrap-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     
     <!--Custom JS files-->
     <script src="index.js"></script>
@@ -30,7 +30,7 @@
                 CSC2521 Course Project
             </div>
             <div class="d-flex justify-content-center my-4">
-                <img src="./media/p2_goodday_linL_ampR.gif" alt="participant smiling gif" style="height:400px;">
+                <img src="./media/p2_goodday_valleygirl.gif" alt="participant smiling gif" style="width:800px;">
             </div>
         </div>
         
@@ -80,6 +80,21 @@
                 As we are working with amplification of emotions on human faces, we have to be aware of the level of exaggeration to avoid the uncanny valley. There are also differences in the perception of realistic human faces and less realistic ones. In general, less realistic faces require more exaggerated faces to reach the emotional intensity that a more realistic human face shows (Mäkäräinen et al., 2014). When comparing perceived realism and eeriness of animated faces, shape is the dominant factor for rating realism and expression intensity (Zell et al., 2015). Furthermore, Zell et al. compared the effect of realism levels in skin texture maps, stylization, shading, lighting, and texture in animated faces. They found that realism is not always preferred and is not a good predictor for animation appeal, eeriness, or attractiveness. One of their experiments found that the models with the highest appeal are closer to reality but still maintain some stylization. There are also different portions of the face that humans tend to use to determine the emotion of animated faces; for instance, for happiness, the most important features in descending order are mouth, eyebrows, and eyes (Zhang et al., 2021). Moreover, when comparing the expression intensity of the animated faces, the more intense happy faces were often perceived as less happy overall (Zhang et al., 2021).    
             </div>
             
+        </div>
+        <div id="extraction">
+            <h4 class="mt-5 mb-2">Facial Landmark Extraction and AU Identification</h4>
+            <div>
+                For this project, we are using existing facial mapping technology (i.e. Apple’s ARKit), as facial landmark detection is a nontrivial task. Prior works (Sayette et al., 2001; Spencer-Smith et al., 2001; Yu et al., 2013) have performed perceptual studies to determine which AU activation induces the perception of each of the six basic emotions. While the literature identifies relevant AUs to target, they do not specify the value for activation or define the path of movement of each AUs. There are some FACS curved shown in Yu et al., however, from our review of literature, there does not seem to be a standard curve for “happiness”. Additionally, there is no one-to-one mapping of blendshapes available from ARKit outputs and FACS. Therefore, we had to create mapping of blendshapes from ARKit to FACS using Chris Landreth’s lecture slides (Landreth, 2023), open-source resources and manual mapping to serve as a foundation to subsequent analysis and emotion amplification. Our results for Anger and Happiness can be seen in Table 2 and 3.
+                <br  /><br  />
+                Using the tables we manually created animations of ValleyGirl displaying varying levels of anger and happiness. Figure 1 and 2 shows ValleyGirl at varying intensity of anger and the associated FACS curves, respectively.
+                <br  /><br  />
+                Similarly, Figure 3 and 4 show ValleyGirl displaying different levels of happiness and the FACS curves.
+                <br  /><br  />
+                Using ValleyGirl, we are limited in replicating reality from our own perception of expressions of anger and happiness. Therefore, we had one of our researchers (Zixin) perform a smiling motion and captured it using ARKit. Using the generated AU curves, we found that there were key points related to the different quantifiable levels of happiness and each level had varying durations. We found that in Zixin’s smile video, there are six main stages of happiness:
+                <p class="text-center fw-bold">
+                    Neutral - Slight Smile - Smile - Genuine Smile - Laughter
+                </p>
+            </div>
         </div>
         <div id="data-collect">
             <h4 class="mt-5 mb-2">Data Collection Study</h4>

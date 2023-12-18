@@ -50,7 +50,8 @@ KNOWN_AUS = {"timecode":[],"blendshapecount":[],
 }
 KNOWN_AUS = KNOWN_AUS.keys()
 
-FILENAME = "MySlate_17_iPhone.csv"
+FILENAME = "./inputs/MySlate_17_iPhone.csv"
+OUT_PATH = "./outputs/"
 
 # Read target video's ARKit blendshapes.
 neutral = pd.read_csv(FILENAME)
@@ -58,4 +59,4 @@ for col in neutral.columns:
   if col.lower() not in KNOWN_AUS:
     neutral.drop(col, axis=1, inplace=True)
 
-neutral.to_csv("p2_goodday_neutral.csv", index=False)
+neutral.to_csv(OUT_PATH+"p2_goodday_neutral.csv", index=False)
