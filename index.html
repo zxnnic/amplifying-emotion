@@ -25,30 +25,61 @@
                 Make it Happier! Discretizing and Amplifying Happiness in Animated Faces
             </h2>
             <div class="text-center" id="subtitle">
-                Jessica Bo and Zixin Zhao
+                <b>Jessica Bo and Zixin Zhao</b>
                 <br />
                 CSC2521 Course Project
             </div>
             <div class="d-flex justify-content-center my-4">
-                <img src="./media/p1_happy.gif" alt="participant smiling gif" style="width:700px;">
+                <img src="./media/p2_goodday_linL_ampR.gif" alt="participant smiling gif" style="height:400px;">
             </div>
         </div>
         
         <div id="intro">
             <h4 class="mt-5 mb-2">Introduction</h4>
             <div>
-              Modeling human expression within facial animation is a complex task as it involves the interplay between a multitude of facial muscles. 
-              The Facial Action Coding System (FACS) (Ekman & Friesen, 1978) has become a popular tool for encoding facial movements based on the musculoskeletal 
-              system, and offers a systematic approach to model emotions on human faces. Despite the advances in automated facial animation, there is still a 
-              reliance on human actors and animators to create realistic expressions on animated faces. Previous works in animation focus on distinguishing distinct 
-              emotions at two levels: neutral and showing extreme emotion. Prior literature shows that there are six main emotions (happy, sad, angry, disgust, surprise, 
-              fear) (SOURCE) and we focused our works on happiness after some pilot testing. Our project aims to explore the possibility of identifying the quantifiable 
-              levels of expressed emotions on human faces beyond the neutral and activated. Additionally, explore methods of amplifying emotions on different facial 
-              models like Apple Face (SOURCE) and JALI's ValleyGirl (SOURCE). 
+                Modeling human expression within facial animation is a complex task as it involves the interplay between many facial muscles. 
+                The Facial Action Coding System (FACS) (Ekman & Friesen, 1978) has become a popular tool for encoding facial movements based on 
+                the musculoskeletal system. It offers a systematic approach to model emotions on human faces. Despite the advances in automated 
+                facial animation, there still needs to be more reliance on human actors and animators to create realistic expressions on 
+                animated faces. Prior literature shows six main emotions (happy, sad, angry, disgust, surprise, and fear) (Ekman & Friesen, 1978), 
+                and we focused our works on happiness after some pilot testing. Yu et al. have shown that people can perceive emotional expression 
+                at three intensities, where each intensity is equally spaced apart. However, emotions are often expressed nonlinearly, so using 
+                equally spaced apart emotions may not capture the different discrete levels of emotion expression. Thus, we want to explore the 
+                possibility of determining the relative spacing between emotion intensity levels. Our project aims to focus on two main research 
+                questions:
+                <ol>
+                    <li>
+                        Can we identify the quantifiable levels of expressed happiness and spacing between each level on human faces?
+                    </li>
+                    <li>
+                        Can we create realistic animations by artificially amplifying happiness on different facial models to the desired levels?
+                    </li>
+                </ol>
+                
+                Our project involves two main components; first, we conduct an exploratory study on the expression of happiness to examine the 
+                generated FACS curves. In the second part, we build a pipeline which uses models like 
+                <a href="https://developer.apple.com/documentation/arkit/arkit_in_ios/content_anchors/tracking_and_visualizing_faces" target="_blank">Apple Face</a> and 
+                JALI's ValleyGirl (Edwards et al., 2016) to manipulate the levels of happiness expressed in videos. The code for this project is available on 
+                <a href="https://github.com/zxnnic/amplifying_emotion" target="_blank">GitHub</a>. 
             </div>
         </div>
         <div id="bg-works">
             <h4 class="mt-5 mb-2">Related Works</h4>
+            <h6>Systematic Mapping of Human Expressions using FACS</h6>
+            <div class="mb-4">
+                The two most popular emotion description methods are FACS and continuous models using affect dimensions. FACS helps encode facial movement based on facial muscles and can be used to reliably model spontaneous emotions (Sayette et al., 2001). Additionally, prior works have been conducted to determine which action units (AU) are correlated to the expression of the six basic emotions. A summary of their results can be seen in Table 1. Using the AU mappings, Spencer-Smith et al. explored creating a three-dimensional parameterized facial expression model. There have also been works in the automatic identification of facial expressions using FACS, with early models using hidden Markov models (Lien et al., 1998) and more recent ones using SDM and CNN-based models (Li et al., 2022).  
+            </div>
+            <h6>Detecting and Quantifying Emotion Expressions</h6>
+            <div>
+                Examining human perception of facial expressions of emotion has been a research topic in psychophysics for some time. Within psychophysics, Marneweck et al. conducted studies to examine the threshold for distinguishing between different levels of emotions for four basic emotions: anger, disgust, happiness, and sadness. They gathered images of actors making a neutral face and one for the four basic emotions tested at maximum intensity. Then morphed the neutral with the one with maximum emotion intensity at 5% increments and showed each to participants to determine whether there were differences between the intensified images. They found that participants could only tell when images had 10-15% differences between them. Additionally, there were differences between each emotion, with happiness requiring the least difference between the two images to tell apart and sadness requiring the largest differences.
+                <br  /><br  />
+                Amaya et al. explored applying “emotion transforms” with respect to speed and range of movement to generate emotions on animated faces. They considered emotion a secondary movement that augmented the primary body movement and computed the difference between the emotional and neutral movements. They used an extracted emotional curve as a mask to transform the phase and amplitudes of neutral movements. Their work focused more on bodily movement. However, we draw inspiration from their methods of extracting an “emotion curve” to apply to a neutral facial animation. 
+                <br  /><br  />
+                Another work we draw inspiration from and closely relate to our project is one by Yu et al., which focuses on synthesizing facial expressions without using human actors. Using FACS-certified actors, they built three-dimensional models of the FACS codes using the randomly sampled points from the AU performance data captured and linearly combined them to formulate a base emotion model for each of the six emotions. They found the most important AUs for each emotion through a human perception experiment, which we utilize as a starting point for our AU data extraction. Through mapping of the AUs, they show that the activations of each AU occur at different times and have different rates of growth, thus showing that FACS curves for emotions are nonlinear. Following the AU extraction, they validated their AU selection by generating three equally spaced intensity levels for each emotion and had participants determine the more intense one. Participants received a 95.4% accuracy. 
+                <br  /><br  />
+                As we are working with amplification of emotions on human faces, we have to be aware of the level of exaggeration to avoid the uncanny valley. There are also differences in the perception of realistic human faces and less realistic ones. In general, less realistic faces require more exaggerated faces to reach the emotional intensity that a more realistic human face shows (Mäkäräinen et al., 2014). When comparing perceived realism and eeriness of animated faces, shape is the dominant factor for rating realism and expression intensity (Zell et al., 2015). Furthermore, Zell et al. compared the effect of realism levels in skin texture maps, stylization, shading, lighting, and texture in animated faces. They found that realism is not always preferred and is not a good predictor for animation appeal, eeriness, or attractiveness. One of their experiments found that the models with the highest appeal are closer to reality but still maintain some stylization. There are also different portions of the face that humans tend to use to determine the emotion of animated faces; for instance, for happiness, the most important features in descending order are mouth, eyebrows, and eyes (Zhang et al., 2021). Moreover, when comparing the expression intensity of the animated faces, the more intense happy faces were often perceived as less happy overall (Zhang et al., 2021).    
+            </div>
+            
         </div>
         <div id="data-collect">
             <h4 class="mt-5 mb-2">Data Collection Study</h4>
@@ -72,6 +103,22 @@
         </div>
         <div id="ref">
             <h4 class="mt-5 mb-2">Reference</h4>
+            <ol>
+                <li>Ekman, P., & Friesen, W. V. (1978). Facial Action Coding System (FACS) [Database record]. APA PsycTests. DOI: 10.1037/t27734-000 </li>
+                <li>Yu, H., Garrod, O. G., & Schyns, P. G. (2012). Perception-driven facial expression synthesis. Computers & Graphics, 36(3), 152-162.</li>
+                <li>Sayette, M. A., Cohn, J. F., Wertz, J. M., Perrott, M. A., & Parrott, D. J. (2001). A psychometric evaluation of the facial action coding system for assessing spontaneous expression. Journal of nonverbal behavior, 25, 167-185.</li>
+                <li>Spencer-Smith, J., Wild, H., Innes-Ker, Å. H., Townsend, J., Duffy, C., Edwards, C., & Pair, J. W. (2001). Making faces: Creating three-dimensional parameterized models of facial expression. Behavior Research Methods, Instruments, & Computers, 33, 115-123.</li>
+                <li>Amaya, K., Bruderlin, A. and Calvert, T. (1996) Emotion from motion. Graphics interface. Vol. 96. 222-229.</li>
+                <li>Marneweck, M., Loftus, A. and Hammond, G. (2013). Psychophysical measures of sensitivity to facial expression of emotion. Frontiers in Psychology, 4, 63.</li>
+                <li>Lien, J. J., Kanade, T., Cohn, J. F.  and Li, C. (1998) Automated facial expression recognition based on FACS action units. Proceedings Third IEEE International Conference on Automatic Face and Gesture Recognition, Nara, Japan, 390-395.</li>
+                <li>Li, S. and Deng, W. (2020). Deep facial expression recognition: A survey. IEEE transactions on affective computing, 13(3), 1195-1215.</li>
+                <li>Mäkäräinen, M., Kätsyri, J. and Takala, T. (2014). Exaggerating facial expressions: A way to intensify emotion or a way to the uncanny valley?. Cognitive Computation, 6, 708-721.</li>
+                <li>Zhang, S., Liu, X., Yang, X., Shu, Y., Liu, N., Zhang, D. and Liu, Y.J. (2021). The influence of key facial features on recognition of emotion in cartoon faces. Frontiers in psychology, 12, p.687974.</li>
+                <li>Zell, E., Aliaga, C., Jarabo, A., Zibrek, K., Gutierrez, D., McDonnell, R. and Botsch, M. (2015). To stylize or not to stylize? The effect of shape and material stylization on the perception of computer-generated faces. ACM Transactions on Graphics (TOG), 34(6), pp.1-12.</li>
+                <li>Edwards, P., Landreth, C., Fiume, E. and Singh, K. (2016). Jali: an animator-centric viseme model for expressive lip synchronization. ACM Transactions on graphics (TOG), 35(4), pp.1-11.</li>
+                <li>Landreth, C. (2023). Making Faces. GDC Animation Summit. Presentation.</li>
+
+            </ol>
         </div>
     </div>
   </body>

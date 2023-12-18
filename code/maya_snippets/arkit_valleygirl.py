@@ -1,5 +1,8 @@
 import json
-data_path = r"xyz.filename.csv"
+data_path = r"D:\Grad\Courses\CSC2521\data_talking\happy\p2_goodday_neutral\MySlate_17_iPhone.csv"
+
+ADJUST_VALLEYGIRL = ["mouthstretchright", "mouthstretchleft", "mouthlowerdownright", "mouthlowerdownleft", "mouthupperupright", "mouthupperupleft"]
+
 def load_apple_motion(motion_data_path = "", recordingfps=30, calibration_data_path=""):
 
     name_to_mesh = {"eyesquintright": ["AU7 – lid tightener", "Mesh31", "Squint_R.Squint_R", 0, 8],
@@ -68,6 +71,8 @@ def load_apple_motion(motion_data_path = "", recordingfps=30, calibration_data_p
         columns = labels.split(",")
         columns = columns[2:]
         raw_cal_data = f.readlines()
+    
+    # adjustments(raw_cal_data)
 
     for i in range(0, len(raw_cal_data)):
         frame_time = raw_cal_data[i].split(",")[0]
@@ -100,6 +105,5 @@ def load_apple_motion(motion_data_path = "", recordingfps=30, calibration_data_p
             weight_name = name_to_mesh[name][2]
             cmds.setKeyframe(weight_name, v=float(cal_data[i][j])*(name_to_mesh[name][4]-name_to_mesh[name][3]),
                                  t=times[i] * mel.eval('float $fps = `currentTimeUnitToFPS`'))
-
 
 load_apple_motion(data_path, 60, data_path)
