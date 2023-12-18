@@ -65,11 +65,16 @@
         </div>
         <div id="bg-works">
             <h4 class="mt-5 mb-2">Related Works</h4>
-            <h6>Systematic Mapping of Human Expressions using FACS</h6>
+            <h5>Systematic Mapping of Human Expressions using FACS</h5>
             <div class="mb-4">
                 The two most popular emotion description methods are FACS and continuous models using affect dimensions. FACS helps encode facial movement based on facial muscles and can be used to reliably model spontaneous emotions (Sayette et al., 2001). Additionally, prior works have been conducted to determine which action units (AU) are correlated to the expression of the six basic emotions. A summary of their results can be seen in Table 1. Using the AU mappings, Spencer-Smith et al. explored creating a three-dimensional parameterized facial expression model. There have also been works in the automatic identification of facial expressions using FACS, with early models using hidden Markov models (Lien et al., 1998) and more recent ones using SDM and CNN-based models (Li et al., 2022).  
+                <div class="d-flex justify-content-center">
+                    <img src="./media/table1_facs.jpg" style="width:500px;">
+                    <p>Table 1</p>
+                </div>
+                
             </div>
-            <h6>Detecting and Quantifying Emotion Expressions</h6>
+            <h5>Detecting and Quantifying Emotion Expressions</h5>
             <div>
                 Examining human perception of facial expressions of emotion has been a research topic in psychophysics for some time. Within psychophysics, Marneweck et al. conducted studies to examine the threshold for distinguishing between different levels of emotions for four basic emotions: anger, disgust, happiness, and sadness. They gathered images of actors making a neutral face and one for the four basic emotions tested at maximum intensity. Then morphed the neutral with the one with maximum emotion intensity at 5% increments and showed each to participants to determine whether there were differences between the intensified images. They found that participants could only tell when images had 10-15% differences between them. Additionally, there were differences between each emotion, with happiness requiring the least difference between the two images to tell apart and sadness requiring the largest differences.
                 <br  /><br  />
@@ -84,29 +89,102 @@
         <div id="extraction">
             <h4 class="mt-5 mb-2">Facial Landmark Extraction and AU Identification</h4>
             <div>
-                For this project, we are using existing facial mapping technology (i.e. Apple’s ARKit), as facial landmark detection is a nontrivial task. Prior works (Sayette et al., 2001; Spencer-Smith et al., 2001; Yu et al., 2013) have performed perceptual studies to determine which AU activation induces the perception of each of the six basic emotions. While the literature identifies relevant AUs to target, they do not specify the value for activation or define the path of movement of each AUs. There are some FACS curved shown in Yu et al., however, from our review of literature, there does not seem to be a standard curve for “happiness”. Additionally, there is no one-to-one mapping of blendshapes available from ARKit outputs and FACS. Therefore, we had to create mapping of blendshapes from ARKit to FACS using Chris Landreth’s lecture slides (Landreth, 2023), open-source resources and manual mapping to serve as a foundation to subsequent analysis and emotion amplification. Our results for Anger and Happiness can be seen in Table 2 and 3.
-                <br  /><br  />
-                Using the tables we manually created animations of ValleyGirl displaying varying levels of anger and happiness. Figure 1 and 2 shows ValleyGirl at varying intensity of anger and the associated FACS curves, respectively.
-                <br  /><br  />
-                Similarly, Figure 3 and 4 show ValleyGirl displaying different levels of happiness and the FACS curves.
-                <br  /><br  />
+                For this project, we are using existing facial mapping technology (i.e. Apple’s ARKit), as facial landmark detection is a nontrivial task. Prior works (Sayette et al., 2001; Spencer-Smith et al., 2001; Yu et al., 2013) have performed perceptual studies to determine which AU activation induces the perception of each of the six basic emotions. While the literature identifies relevant AUs to target, they do not specify the value for activation or define the path of movement of each AUs. There are some FACS curved shown in Yu et al., however, from our review of literature, there does not seem to be a standard curve for “happiness”. Additionally, there is no one-to-one mapping of blendshapes available from ARKit outputs and FACS. Therefore, we had to create mapping of blendshapes from ARKit to FACS using Chris Landreth’s lecture slides (Landreth, 2023), open-source resources and manual mapping to serve as a foundation to subsequent analysis and emotion amplification. Our results for Anger and Happiness can be seen in Table 2 and 3. 
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/table2_anger.jpg" style="width:550px;">
+                    <p>Table 2</p>
+                </div>
+
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/table3_happy.jpg" style="width:550px;">
+                    <p>Table 3</p>
+                </div>
+                
+                Using the tables we manually created animations of ValleyGirl displaying varying levels of anger and happiness. Figure 1 shows ValleyGirl and Apple Face at varying intensity of anger.
+                <div class="my-3 row d-flex justify-content-center">
+                    <img src="./media/pilot_anger.png" style="width:800px;">
+                </div>
+                Similarly, Figure 2 shows ValleyGirl and Apple Face displaying different levels of happiness and the FACS curves.
+                <div class="my-3 row d-flex justify-content-center">
+                    <img src="./media/pilot_smile.png" style="width:800px;">
+                </div>
                 Using ValleyGirl, we are limited in replicating reality from our own perception of expressions of anger and happiness. Therefore, we had one of our researchers (Zixin) perform a smiling motion and captured it using ARKit. Using the generated AU curves, we found that there were key points related to the different quantifiable levels of happiness and each level had varying durations. We found that in Zixin’s smile video, there are six main stages of happiness:
                 <p class="text-center fw-bold">
                     Neutral - Slight Smile - Smile - Genuine Smile - Laughter
                 </p>
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/nicole_smile_graph.png" style="width:700px;">
+                </div>
+                In Figure 3, we plotted all the main identified AUs on the left side, as the right side is assumed to be mirrored, that are related to expressions of happiness from previous works. We observed that there are nonlinear activations of different AUs, with MouthSmileLeft being activated first and having almost a stepladder shape. The shape of the curves presented here shows that the duration of each level of happiness is not evenly spaced, therefore varying intensity using equally spaced intervals is likely not going to be able to capture the different expressions realistically. 
             </div>
         </div>
-        <div id="data-collect">
-            <h4 class="mt-5 mb-2">Data Collection Study</h4>
+        <div id="recording-study">
+            <h4 class="mt-5 mb-2">Recording Study</h4>
+            <div>
+                To collect initial data on the cognitive process of expressing emotions, we contacted drama clubs and theatre groups across campus. We hoped to gain insight into the various ways people express emotions consciously through acting. However, due to low participant turnout, we conducted a separate data collection study using available participants. We gathered a total of eight participants (N=8) for our recording study. Our data collection study consisted of three main parts:
+                
+                <ol>
+                    <li>Semi-structured interview about different ways emotions can be expressed</li>
+                    <li>Performing neutral to full intensity happy and neutral to full intensity angry faces</li>
+                    <li> Reciting two sentences in two different tones (neutral-happy and neutral-angry)</li>
+                </ol>
+                For the two sentences, we chose the following:
+                <ul>
+                    <li>I had such a good day today.</li>
+                    <li>I almost got run over by a car today. </li>
+                </ul>
+            </div>
+            <h5>Interview Results</h5>
+            <div class="mb-4">
+                We conducted our study in various settings, however the same questions were asked to each participant and the order was unchanged. From the interviews we found that people generally perceived anger having three separate levels: annoyed, angry, and yelling. Similar facial muscles were engaged, but with each increased level, the activation of the muscles would increase. For happiness, people found that there were four different expressions people make at varying levels of happiness: small smile, cheeks puffed smile, eyes crinkles smile, laughing with teeth. In addition to facial expressions, participants would bring up nuances of expressing emotions that cannot be captured by face alone, such as a conflicting body language and face expressions as well as body movements as a facet of expressing emotions like anger.
+            </div>
+            <h5>Data Collection Results Limitations</h5>
+            <div class="mb-4">
+                There were limitations due to the lack of one-to-one mapping of Apple Face and ValleyGirl blenshapes, making it initially difficult to transfer the emotions recorded using ARKit onto ValleyGirl. The differences in the neutral values needed to be manually hardcoded. Below is a video explaining the problems we encountered during initial testing anger expressions. Due to the problems that arose with unnatural looking angry expressions during the participant study. We decided to not use the data collected for anger. 
+                Instead our project would focus on expressions of happiness.
+                <div class="my-3 d-flex justify-content-center">
+                    <video width="600px" controls>
+                        <source src="./media/p3_problems_w_mouth.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                      </video>
+                </div>
+                Additionally, we encountered some problems with head tracking in ARKit and capturing FACS curves when people are laughing. As laughing often involves movements of the head and body, the captured curves look chaotic and the mapped expressions does not mirror the expression of the human actor perfectly. For example, Figure 4 shows a participant's correlated FACS curve showing the activated AUs when they are laughing. Then Figure 5 shows the captured video and modelled facial expressions that was obtained through ARKit. 
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/p2_laughing_facs.png" style="width:400px;">
+                </div>
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/p2_gif.gif" style="width:200px;"><img src="./media/p2_happy_appleface.gif" style="width:200px;"><img src="./media/p2_happy_jali.gif" style="width:200px;">
+                </div>
+            </div>
+            <h5>Emotion Level Discretization</h5>
+            <div class="mb-4">
+                Using the previously identified AUs for happiness, as noted in Table 2, we extracted all the recorded blendshape weights of each participants to determine whether we would be able to obtain a generalized graph of a happiness FACS curve. Figure 6 shows the FACS curve of each identified AU for happiness of all the participants. 
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/facs_curves_happy.png" style="width:900px;">
+                </div>
+                After obtaining these curves, we resampled them to the same length and start activation time, so that we can approximate a mean curve for all identified AUs.
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/mean_aus_happy.png" style="width:900px;">
+                </div>
+
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/table4_pcafeatures.jpg" style="width:700px;">
+                </div>
+            </div>
+
+            <h5>Emotion Level Discretization</h5>
+            <div class="mb-4">
+
+            </div>
         </div>
-        <div id="data-analysis">
-            <h4 class="mt-5 mb-2">Recording Analysis</h4>
-        </div>
+
+
         <div id="perc-study">
             <h4 class="mt-5 mb-2">Perceptual Study</h4>
-        </div>
-        <div id="results">
-            <h4 class="mt-5 mb-2">Results</h4>
+            <h5>Results</h5>
+            <div class="mb-4">
+                
+            </div>
         </div>
         <div id="discussion">
             <h4 class="mt-5 mb-2">Discussion</h4>
