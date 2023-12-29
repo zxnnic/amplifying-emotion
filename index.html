@@ -29,361 +29,403 @@
                 <br />
                 CSC2521 Course Project
             </div>
-            <div class="d-flex justify-content-center my-4">
+            <!-- <div class="d-flex justify-content-center my-4">
                 <img src="./media/p2_goodday_valleygirl.gif" alt="participant smiling gif" style="width:800px;">
             </div>
-            <div class="font-italic text-center mb-3">Figure 1: ValleyGirl saying the same phrase with the original captured (left) neutral face, (middle) amplified happiness using a naive linear method, and (right) amplified happiness using a data-driven method. </div>
+            <div class="font-italic text-center mb-3">Figure 1: ValleyGirl saying the same phrase with the original captured (left) neutral face, (middle) amplified happiness using a naive linear method, and (right) amplified happiness using a data-driven method. </div> -->
+            <div class="my-3 d-flex justify-content-center">
+                    <video width="700px" controls>
+                        <source src="./media/final_video.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                      </video>
+            </div>
+            <div class="font-italic text-center mb-3">Video 1: Overview and demonstration of the emotion amplification pipeline and results.</div>  
         </div>
         
         <div id="intro">
-            <h4 class="mt-5 mb-2">Introduction</h4>
+            <h4 class="mt-5 mb-2">1. Introduction</h4>
             <div>
-                Modeling human expression within facial animation is a complex task as it involves the interplay between many facial muscles. The Facial Action Coding System (FACS) (Ekman & Friesen, 1978) has become a popular tool for encoding facial movements based on the musculoskeletal system, via action units (AUs). It offers a systematic approach to model emotions on human faces. Despite the advances in automated facial animation, there still needs to be more reliance on human actors and animators to create realistic expressions on animated faces. Prior literature shows six main emotions (happy, sad, angry, disgust, surprise, and fear) (Ekman & Friesen, 1978), and we focused our works on happiness after some pilot testing. Yu et al. (2012) have shown that people can perceive emotional expression at three intensities, where each intensity is equally spaced apart. However, emotions are often expressed nonlinearly, so using equally spaced apart emotions may not capture the different discrete, granular levels of emotion expression, nor the dynamic progression of emotion. Thus, we want to explore how realistic expressions captured from real people can be used to determine different intensities of emotions, which can be applied to artificially control the emotion expression in animated models. . Our project aims to address  two main research questions:
+                Modeling human expression within facial animation is a complex task as it involves the interplay between many facial muscles. The Facial Action Coding System (FACS) (Ekman & Friesen, 1978) is a popular tool for encoding facial movements based on the musculoskeletal system, via action units (AUs). It offers a systematic approach to model emotions on human faces. Despite the advances in automated facial animation, there is still reliance on human actors and animators to create realistic, emotive expressions on animated faces. 
+                <!-- Prior literature shows six main emotions (happy, sad, angry, disgust, surprise, and fear) (Ekman & Friesen, 1978), and we focused our works on happiness after some pilot testing.  -->
+                Yu et al. (2012) validates FACS-driven synthesis of six emotions (happy, sad, angry, disgust, surprise, and fear) at three levels of intensities.
+                <!-- have shown that people can perceive emotional expression at three intensities, where each intensity is equally spaced apart.  -->
+                However, emotions are often expressed nonlinearly, so using equally spaced apart emotions may not capture the different discrete, granular levels of emotion expression, nor the dynamic progression of emotion. Thus, we want to explore how realistic expressions captured from real people can be used to determine different intensities of emotions, which can be applied to artificially control the emotion expression in animated models. We focus on happiness as it is an easily expressed and recognizeable emotion. Our project aims to address two main research questions:
                 <ol class="mx-5 mt-1">
                     <li class="rq">
-                        Can we identify the quantifiable levels of expressed happiness and spacing between each level on human faces?                    
+                        <!-- Can we identify the quantifiable levels of happiness and spacing between each level on human faces?                     -->
+                        Can we define the quantifiable levels of happiness that are recognizable on animation models?
                     </li>
                     <li class="rq">
-                        Can we create realistic animations by artificially amplifying or dampening happiness on different facial models to the desired levels?
+                        Can we create fine-tuned controls for artificially amplifying and dampening happiness on animation models to desired levels?
                     </li>
                 </ol>
                 
-                Our project involves two main components; first, we conduct an exploratory study on the expression of happiness to examine the 
-                generated FACS curves. In the second part, we build a pipeline which uses models like 
+                Our project involves two main components; first, we conduct an exploratory study on the expression of happiness to examine through FACS curves collected from participants. In the second part, we build a pipeline which uses models like 
                 <a href="https://developer.apple.com/documentation/arkit/arkit_in_ios/content_anchors/tracking_and_visualizing_faces" target="_blank">Apple Face</a> and 
-                JALI's ValleyGirl (Edwards et al., 2016) to manipulate the levels of happiness expressed in videos. The code for this project is available on 
+                JALI's ValleyGirl (Edwards et al., 2016) to manipulate the levels of happiness expressed in videos and validate the perceptual results. The code for this project is available on 
                 <a href="https://github.com/zxnnic/amplifying_emotion" target="_blank">GitHub</a>. 
             </div>
         </div>
         <div id="bg-works">
-            <h4 class="mt-5 mb-2">Related Works</h4>
-            <h5>Systematic Mapping of Human Expressions using FACS</h5>
+            <h4 class="mt-5 mb-2">2. Related Works</h4>
+            <h5>2.1. Systematic Mapping of Human Expressions using FACS</h5>
             <div class="mb-4">
-                The two most popular emotion description methods are FACS and continuous models using affect dimensions. FACS helps encode facial movement based on facial muscles and can be used to reliably model spontaneous emotions (Sayette et al., 2001). Additionally, prior works have been conducted to determine which action units (AU) are correlated to the expression of the six basic emotions. A summary of their results can be seen in <a href="#1996-expression">Table 1</a>. Using the AU mappings, Spencer-Smith et al. explored creating a three-dimensional parameterized facial expression model. There have also been works in the automatic identification of facial expressions using FACS, with early models using hidden Markov models (Lien et al., 1998) and more recent ones using SDM and CNN-based models (Li et al., 2022).  
+                Two popular emotion description methods are FACS and continuous models using affect dimensions. FACS encodes facial movement based on facial muscles and can be used to reliably model spontaneous emotions (Sayette et al., 2001). Additionally, prior works like Parke & Waters (1996) have been conducted to determine which action units (AU) are correlated to the expression of the six basic emotions. A summary of results can be seen in <a href="#1996-expression">Table 1</a>. Using the AU mappings, Spencer-Smith et al. (2001) explored creating a three-dimensional parameterized facial expression model. There have also been works in the automatic identification of facial expressions using FACS, with early models using hidden Markov models (Lien et al., 1998) and more recent ones using support vector machines (SVM) and convolutional neural networks (CNN) (Li et al., 2022).  
                 <div class="d-flex justify-content-center mt-2">
                         <img src="./media/expression-1996.jpg" style="width:500px;" id="1996-expression">
                 </div>
                 <div class="font-italic text-center">Table 1: Action units associated with each of the 6 basic emotions (Parke & Waters, 1996)</div>
-                
             </div>
-            <h5>Detecting and Quantifying Emotion Expressions</h5>
-            <div>
-                Examining human perception of facial expressions of emotion has been a research topic in psychophysics for some time. Within psychophysics, Marneweck et al. (2013) conducted studies to examine the threshold for distinguishing between different levels of emotions for four basic emotions: anger, disgust, happiness, and sadness. They gathered images of actors making a neutral face and one for the four basic emotions tested at maximum intensity. Then morphed the neutral with the one with maximum emotion intensity at 5% increments, and showed each to participants to determine whether there were differences between the intensified images. They found that participants could only tell when images had 10-15% differences between them. Additionally, there were differences between each emotion, with happiness requiring the least difference between the two images to tell apart and sadness requiring the largest differences.
+            <h5>2.2. Quantifying and Generation Emotions</h5>
+            <div class="mb-4">
+                <!-- Examining human perception of facial expressions of emotion has been a research topic in psychophysics for some time.  -->
+                Within psychophysics, Marneweck et al. (2013) conducted studies to examine the threshold for distinguishing between different intensities for four basic emotions: anger, disgust, happiness, and sadness. They morph images of actors from neutral to maximum emotion at granular increments, and test participants on perceivable differences.
+                <!-- They gathered images of actors making a neutral face and one for the four basic emotions tested at maximum intensity. Then morphed the neutral with the one with maximum emotion intensity at 5% increments, and showed each to participants to determine whether there were differences between the intensified images.  -->
+                They found that participants can recognize 10-15% differences in emotion intensity, with happiness requiring the least difference and sadness requiring the most. We follow a similar experimental method for our perceptual tests. 
                 <br  /><br  />
-                Amaya et al. (1996) explored applying “emotion transforms” with respect to speed and range of movement to generate emotions on animated faces. They considered emotion a secondary movement that augmented the primary body movement, and computed the difference between the emotional and neutral movements. They used an extracted emotional curve as a mask to transform the phase and amplitudes of neutral movements. Their work focused more on bodily movement. However, we draw inspiration from their methods of extracting an “emotion curve” to apply to a neutral facial animation. 
+                <!-- Another work we draw inspiration from and closely relate to our project is one by  -->
+                Yu et al. (2012) determinine the activated AUs for each emotion through a human perceptual experiment and were able to synthesize facial expressions on 3D models without the use of human actors.
+                <!-- Using FACS-certified actors, they built three-dimensional models of the FACS codes using the randomly sampled points from the AU performance data captured and linearly combined them to formulate a base emotion model for each of the six emotions.  -->
+                <!-- They determine the most important AUs for each emotion through a human perception experiment, which we utilize as a starting point for our AU data extraction.  -->
+                They show that the activations of each AU occur at different times and have non-linear progression curves. They validated their AU selection by generating three equally spaced intensity levels for each emotion. Study participants were able to determine the higher intensity expression in pairwise images with 95.4% accuracy. We draw inspiration from their perceptual-driven methods for our technical implementation
                 <br  /><br  />
-                Another work we draw inspiration from and closely relate to our project is one by Yu et al. (2012), which focuses on synthesizing facial expressions without using human actors. Using FACS-certified actors, they built three-dimensional models of the FACS codes using the randomly sampled points from the AU performance data captured and linearly combined them to formulate a base emotion model for each of the six emotions. They found the most important AUs for each emotion through a human perception experiment, which we utilize as a starting point for our AU data extraction. Through mapping of the AUs, they show that the activations of each AU occur at different times and have different rates of growth, thus showing that FACS curves for emotions are nonlinear. Following the AU extraction, they validated their AU selection by generating three equally spaced intensity levels for each emotion and had participants determine the more intense one. Participants achieved  95.4% accuracy. 
-                <br  /><br  />
-                As we are working with amplification of emotions on human faces, we have to be aware of the level of exaggeration to avoid the uncanny valley. There are also differences in the perception of realistic human faces and less realistic ones. In general, less realistic faces require more exaggerated faces to reach the emotional intensity that a more realistic human face shows (Mäkäräinen et al., 2014). When comparing perceived realism and eeriness of animated faces, shape is the dominant factor for rating realism and expression intensity (Zell et al., 2015). Furthermore, Zell et al. (2014) compared the effect of realism levels in skin texture maps, stylization, shading, lighting, and texture in animated faces. They found that realism is not always preferred and is not a good predictor for animation appeal, eeriness, or attractiveness. One of their experiments found that the models with the highest appeal are closer to reality but still maintain some stylization. There are also different portions of the face that humans tend to use to determine the emotion of animated faces; for instance, for happiness, the most important features in descending order are mouth, eyebrows, and eyes (Zhang et al., 2021). Moreover, when comparing the expression intensity of the animated faces, the more intense happy faces were often perceived as less happy overall (Zhang et al., 2021).
+                Amaya et al. (1996) explored applying “emotion transforms” with respect to speed and range of movement to generate emotions in animation models. 
+                <!-- They considered emotion a secondary movement that augmented the primary body movement, and computed the difference between the emotional and neutral movements.  -->
+                They augment the primary body movements with an extracted emotional curve as a mask to transform the phase and amplitude of the original movement. 
+                <!-- used an extracted emotional curve as a mask to transform the phase and amplitudes of neutral movements.  -->
+                We draw inspiration from their methods of extracting an “emotion curve” to apply to a neutral facial animation. 
+            </div>
+
+            <h5>2.3. Realism in Animated Faces</h5>
+            <div class="mb-4">
+                As we are working with amplification of emotions on human faces, we have to be aware of the level of exaggeration to avoid the uncanny valley. 
+                <!-- There are also differences in the perception of realistic human faces and less realistic ones.  -->
+                In general, less realistic faces require more exaggeration to reach the same emotional intensity of a realistic human face (Mäkäräinen et al., 2014). When comparing perceived realism and eeriness of animated faces, shape is the dominant factor for rating realism and expression intensity (Zell et al., 2015). Furthermore, realism in terms of skin texture maps, stylization, shading, lighting, and texture is not always preferred and is not a good predictor for animation appeal (Zell et al., 2014). 
+                <!-- One of their experiments found that the models with the highest appeal are closer to reality but still maintain some stylization.  -->
+                There are also different portions of the face that humans tend to use to determine the emotion of animated faces; for instance, for happiness, the most important features in descending order are mouth, eyebrows, and eyes (Zhang et al., 2021). Moreover, when comparing the expression intensity of the animated faces, the more intense happy faces were often perceived as less happy overall (Zhang et al., 2021).
             </div>
             
         </div>
-        <div id="extraction">
-            <h4 class="mt-5 mb-2">Pilot Study: Facial Landmark Extraction and AU Identification</h4>
-            <div>
-                For this project, we are using existing facial mapping technology (Apple's ARKit), as facial landmark detection is a nontrivial task. Prior works (Sayette et al., 2001; Spencer-Smith et al., 2001; Yu et al., 2013) have performed perceptual studies to determine which AU activation induces the perception of each of the six basic emotions. While the literature identifies relevant AUs to target, they do not specify the value for activation or define the path of movement of each AUs. There are some FACS curved shown in Yu et al. (2013), however, from our review of literature, there does not seem to be a standard curve for “happiness”. Additionally, there is no one-to-one mapping of blendshapes available from ARKit outputs and FACS. Therefore as an initial prototyping step, we attempt to create mapping of blendshapes from ARKit to FACS using Chris Landreth's lecture slides (Landreth, 2023), and to downstream animation models using open-source resources and manual mapping to serve as a foundation to subsequent analysis and emotion amplification. We perform this for Anger and Happiness, which are two of the strongest expressions, and the results are summarized in <a href="#happy-facs">Table 2</a>. 
+        
+        <div id="recording-study">
+            <h4 class="mt-5 mb-2">3. User Study: Recording Emotions and Speech</h4>
+            <div class="mb-4"> 
+                For this project, we use existing facial mapping technology (Apple's ARKit), as facial landmark detection is a nontrivial task. Prior works (Sayette et al., 2001; Spencer-Smith et al., 2001; Yu et al., 2013) have performed perceptual studies to determine which AU activation induces the perception of each of the basic emotions. While the literature identifies relevant AUs to target, they do not specify the value for activation or define the path of temporal progression of each AUs. While there are some FACS curved shown in Yu et al. (2013), however, there does not seem to be a standard curve for “happiness” (see <a href="#appendix_pilot">Appendix A.1.</a> for our attempt to manually generate happy expressions). Therefore, our first step is to collect a dataset of dynamic expressions of happiness recorded with a group of human participants. In the next stage, we apply the data towards controlling the level of happiness in animated models. 
 
-                <div class="mt-3 d-flex justify-content-center" id="happy-facs">
-                    <img src="./media/table3_happy.jpg" style="width:500px;">
-                </div>
-                <div class="font-italic text-center mb-3">Table 2: Action units with activation percentage at different intensities of happiness and their corresponding JALI and Apple Face blendshape names.</div>
+                <br></br>
+                Note that while the output of ARKit recordings is a CSV of blendshape activations corresponding to their proprietary model, they generally map directly to an AU of the FACS system, so we will refer to the blendshapes as AUs for simplicity. We use Melinda Ozel's open source <a href="https://melindaozel.com/sd/arkit-to-facs-cheat-sheet/" target="_blank">ARKit to FACS cheat sheet</a> as a mapping guideline.
+            </div>
 
-                Similarly, <a href="#happy-modelled">Figure 2</a> shows ValleyGirl and Apple Face displaying different levels of happiness.
-                <div class="mt-3 row d-flex justify-content-center" id="happy-modelled">
-                    <img src="./media/pilot_smile.png" style="width:700px;">
-                </div>
-                <div class="font-italic text-center mb-3" >Figure 2: Happiness at differen levels of happiness</div>
-
-                Next we investigated if real world data reflects our literature-derived prototypes. Therefore, we had one of our researchers (Zixin) perform a gradual smiling motion and captured it using ARKit. Anger was not performed due to the difficulty of the emotion. Using the generated FACS curves, we found that there were key points related to the different quantifiable levels of happiness and each level had varying durations. Each section was identified holistically using our own judgment aided by Chris Landreth's slides (Landreth, 2023), thus it may not be the most accurate. We found that in Zixin's smile video, there are five main stages of happiness as shown in <a href="#nicole-pilot">Figure 3</a>.
+            <h5>3.1. Pilot Recording Study</h5>
+            <div class="mb-4"> 
+                <!-- Next we investigated if real world data reflects our literature-derived prototypes. Therefore, we had one of our researchers (Zixin) perform a gradual smiling motion and captured it using ARKit. Anger was not performed due to the difficulty of the emotion.  -->
+                As a pilot precursor to our full-scale user study, we manually analyze the recording of a member of the research tem (Zixin) performing a gradual smiling motion.
+                Using the generated FACS curves, we found that there were key points related to the different quantifiable levels of happiness and each level had varying durations. Each section was approximately identified using our own judgment aided by Chris Landreth's slides (Landreth, 2023). We observed that there are nonlinear activations of different AUs, with MouthSmile (AU 12) activating significantly ahead of other AUs. The AUs relevant to expressing happiness are identified through their activation and plotted in <a href="#nicole-pilot">Figure 1</a>, alongside with the five salient stages of happiness.
+                <br> </br>
                 <p class="text-center">
                     <b>Neutral - Slight Smile - Smile - Genuine Smile - Laughter</b>
                 </p>
                 <div class="mt-3 d-flex justify-content-center" id="nicole-pilot">
                     <img src="./media/nicole_smile_graph.png" style="width:700px;">
                 </div>
-                <div class="font-italic text-center mb-3">Figure 3: The stages of smiling and the associated FACS curves, the stages, or levels, discretize include Neutral, Slight Smile, Smile, Genuine Smile, and Laughter. </div>
+                <div class="font-italic text-center mb-3">Figure 1: The stages of smiling and the associated FACS curves. Discretized levels are Neutral, Slight Smile, Smile, Genuine Smile, and Laughter. </div>
 
-                We plotted all the main identified AUs on the left side, as the right side is assumed to be mirrored, that are related to expressions of happiness from previous works. We observed that there are nonlinear activations of different AUs, with MouthSmileLeft being activated first and having almost a stepladder shape. The shape of the curves presented here shows that the duration of each level of happiness is not evenly spaced, therefore varying intensity using equally spaced intervals is likely not going to be able to capture the different expressions realistically. 
+                <!-- We plotted all the main identified AUs on the left side, as the right side is assumed to be mirrored, that are related to expressions of happiness from previous works. We observed that there are nonlinear activations of different AUs, with MouthSmileLeft being activated first and having almost a stepladder shape. The shape of the curves presented here shows that the duration of each level of happiness is not evenly spaced, therefore varying intensity using equally spaced intervals is likely not going to be able to capture the different expressions realistically.  -->
             </div>
-        </div>
-        <div id="recording-study">
-            <h4 class="mt-5 mb-2">User Study: Recording Emotion Activations and Speech</h4>
-            <div>
-                To collect more data on expressing emotions, we contacted drama clubs and theatre groups across University of Toronto campus. We hoped to gain insight into the various ways experienced actors express emotions consciously through acting. However, due to low participant turnout, we conducted a separate data collection study using available participants. We gathered a total of eight participants (N=8) for our recording study. Our data collection study consisted of three main parts:
+
+            <h5>3.2. Full Recording Study Protocol</h5>
+            <div class="mb-4">
+                <!-- To collect more data on expressing emotions, we contacted drama clubs and theatre groups across University of Toronto campus. We hoped to gain insight into the various ways experienced actors express emotions consciously through acting. However, due to low participant turnout, we conducted a separate data collection study using available participants.  -->
+                For the full recording study, we gathered a total of eight participants (N=8) of mixed gender. Our data collection study consisted of three steps:
                 <ol>
-                    <li>Semi-structured interview about different ways emotions can be expressed</li>
-                    <li>Performing neutral to full intensity happy and neutral to full intensity angry faces</li>
-                    <li>Reciting two sentences in two different tones (neutral/happy and neutral/angry)</li>
+                    <li>Semi-structured interview with the partipant about different ways happiness can be expressed</li>
+                    <li>Record the participant transitioning from neutral to full happiness.</li>
+                    <li>Record the partipant saying the sentence <i>"I had such a good day today"</i>, once in a neutral tone/expression, and once with a happy tone/expression.</li>
                 </ol>
-                For the two sentences, we chose the following:
+                <!-- For the two sentences, we chose the following:
                 <ul>
                     <li>"I had such a good day today."</li>
                     <li>"I almost got run over by a car today."</li>
-                </ul>
+                </ul> -->
             </div>
-            <h5>Interview Results</h5>
+            <h5>3.3. Interview Results</h5>
             <div class="mb-4">
-                We conducted our study in various settings, however the same questions were asked to each participant and the order was unchanged. From the interviews we found that people generally perceived anger having three separate levels: annoyed, angry, and yelling. Similar facial muscles were engaged, but with each increased level, the activation of the muscles would increase. For happiness, people found that there were four different expressions people make at varying levels of happiness: small smile, cheeks puffed smile, eyes crinkles smile, laughing with teeth. In addition to facial expressions, participants would bring up nuances of expressing emotions that cannot be captured by face alone, such as a conflicting body language and face expressions as well as body movements as a facet of expressing emotions like anger.
+                We conducted our study in various settings, however the same questions were asked to each participant and the order was unchanged. 
+                <!-- From the interviews we found that people generally perceived anger having three separate levels: annoyed, angry, and yelling. Similar facial muscles were engaged, but with each increased level, the activation of the muscles would increase.  -->
+                From the interview, we found that people identify four expressions that make up different happiness: small smile, cheeks puffed smile, eyes crinkles smile, laughing with teeth. This, in combination with neutral, aligns with our observations of from the pilot study.
+                In addition to facial expressions, participants brought up nuances of expressing emotions that cannot be captured by face alone, such as a conflicting body language and face expressions as well as body movements as an extention of expression emotions.
             </div>
-            <h5>Recording Results</h5>
+
+            <h5>3.4. Emotion Recording Results</h5>
             <div class="mb-4">
-                We show a sample of what the recording results looked like. <a href="#p1-happy">Figure 4</a> shows P1's happiness expression video (displayed with permission) and the ARKit's AUs animated on the Apple Face. 
+                We show a sample of what the recording results looked like. <a href="#p1-happy">Figure 2</a> shows P1's happiness expression video (displayed with permission) and the ARKit's AUs animated on the Apple Face. 
                 <div class="mt-3 d-flex justify-content-center" id="p1-happy">
-                    <img src="./media/p1_happy.gif" style="width:550px;">
+                    <img src="./media/p1_happy_cropped.gif" style="width:550px;">
                 </div>
-                <div class="font-italic text-center mb-3">Figure 4: Sample recording from our recording study of a participant going from a neutral face to full smile</div>
+                <div class="font-italic text-center mb-3">Figure 2: Sample recording from our recording study of a participant going from a neutral face to full smile</div>
 
             </div>
             
-            <h5>Emotion Level Discretization</h5>
+            <h5>3.5. Emotion Level Discretization</h5>
             <div class="mb-4">
-                Using the previously identified AUs for happiness from the Pilot study, we extracted each participant's recorded blendshape weights to determine whether we could obtain a generalized graph of a happiness FACS curve. The graphs in <a href="#facs-curve-happy">Figure 5</a> below shows the FACS curve of each identified AU for the participants' happiness. 
+                Using the previously identified AUs for happiness from the pilot study, we extracted each participant's recorded blendshape weights to determine a generalized a happiness FACS curve. 
+
+                <!-- <a href="#facs-curve-happy">Figure 5</a> below shows the FACS curve of each identified AU for the participants' happiness. 
                 <div class="my-3 d-flex justify-content-center" id="facs-curve-happy">
                     <img src="./media/facs_curves_happy.png" style="width:850px;">
                 </div>
-                <div class="font-italic text-center mb-3">Figure 5: un-aligned FACS curves of the happy AUs of all recording study participants.</div>
+                <div class="font-italic text-center mb-3">Figure 5: un-aligned FACS curves of the happy AUs of all recording study participants.</div> -->
 
-                After obtaining these curves, we resampled them to the same length and start activation time, so that we can approximate a mean curve for all identified AUs as shown in <a href="#mean-aus">Figure 6</a>.
+                The curves are all resampled to the same length and start activation time, so that we can approximate a mean curve for all identified happiness AUs as shown in <a href="#mean-aus">Figure 3</a>. See the original raw signals in the <a href="#appendix_raw">Appendix A.2</a>. 
+
                 <div class="my-3 d-flex justify-content-center" id="mean-aus">
                     <img src="./media/mean_aus_happy.png" style="width:850px;">
                 </div>
-                <div class="font-italic text-center mb-3">Figure 6: aligned FACS curves of the happy AUs of all recording study participants with the mean curves for each AU shown in orange.</div>
+                <div class="font-italic text-center mb-3">Figure 3: Aligned FACS curves of the happy AUs of all recording study participants with the mean curves for each AU shown in orange.</div>
 
-                There are some variations in how each participant's AUs were activated. However, in general, there is a similar trend for the AUs. The AUs with the most significant differences between participants are EyeSquint, MouthDimple, and NoseSneer. There is one clear outlier for the MouthDimple AU (P6), which may be part of a personal quirk. Since we did not know the importance of each AU for the expression of happiness, we used PCA on all the features to determine the features that correlate to expressing happiness. After running PCA, we found that reducing the components to two dimensions captures 99.7% of the data feature variances in our data, with component 1 capturing 97.8% of the feature variances and component 2 capturing 1.9%. Additionally, through feature analysis of each component, details shown in <a href="#pca-features">Table 3</a> focusing on the values for the first component since it captures the features at a higher percentage, we can see that the most important features in descending order are MouthSmile, CheekSquint, and MouthUpperUp. Therefore, the variations in EyeSquint, MouthDimple, and NoseSneer were less important when determining the shape of the general happiness FACS curves. 
+                There are some variations in how each participant's AUs were activated, but the general trend is consistent. The AUs with the most significant differences between participants are EyeSquint (AU 7), MouthDimple (AU 14), and NoseSneer (AU 9). There is one clear outlier for the MouthDimple (P6), which may be part of a personal quirk. 
+                <br></br>
+                Since we did not know the importance of each AU for the expression of happiness, we used principal component analysis (PCA) to determine the features that correlate to expressing happiness. PCA shows that reducing the components to two dimensions captures 99.7% of the data feature variances in our data.
+                <!-- , with component 1 capturing 97.8% of the feature variances and component 2 capturing 1.9%.  -->
+                Through feature analysis of each component, (details shown in <a href="#pca-features">Table 2</a>, where the first component which captures 97.8% of the variation and the second captures 1.9%), we show that the most important features in descending order are MouthSmile (AU 12), CheekSquint (AU 6), and MouthUpperUp (AU 10). 
+                <!-- Therefore, the variations in EyeSquint, MouthDimple, and NoseSneer were less important when determining the shape of the general happiness FACS curves.  -->
 
                 <div class="my-3 d-flex justify-content-center" id="pca-features">
                     <img src="./media/table4_pcafeatures.jpg" style="width:850px;">
                 </div>
-                <div class="font-italic text-center mb-3">Table 3: Two main component obtained from PCA and their correlation to the main happiness AUs.</div>
+                <div class="font-italic text-center mb-3">Table 2: Two main component obtained from PCA and their correlation to the main happiness AUs.</div>
 
-                After combining all the mean AUs, we get the graph in <a href="#mean-au-all">Figure 7</a> shown below. 
+                After combining all the mean AUs, we get the graph in <a href="#mean-au-all">Figure 4</a> shown below. 
                 <div class="my-3 d-flex justify-content-center" id="mean-au-all">
                     <img src="./media/means_happy.png" style="width:600px;">
                 </div>
-                <div class="font-italic text-center mb-3">Figure 7: FACS curves of the mean of happiness AUs obtained from our recording study.</div>
+                <div class="font-italic text-center mb-3">Figure 4: FACS curves of the mean of happiness AUs obtained from our recording study.</div>
 
-                Using the calculated mean AU values, we group them into different intensity levels. After visually identifying that there could be between 4 and 6 discrete levels, we used k-means clustering with k=4,5,6 and mapped it to the mean curves to see the cut-off for each level. From the graphs below, we found that k=5 captured the different segments of the curves and grouped them into levels that best balanced granularity and recognizability. When k=4, some AUs are activated in the neutral range, while k=6 discretizes the levels into too many levels, making it hard to distinguish one from another. One thing to note is that all bins similarly grouped neutral (dark blue) and high-intensity (red) sections of the curves; the main differences were in separating the middle expressions. In <a href="#k-means-curves">Figure 8</a>, the blue sections represent the start of a smile, the yellow-orange section represents a smile, and the red corresponds to an open mouth laughing.
+                Using the calculated mean AU values, we group them into different intensity levels. After visually identifying that there could be between 4 and 6 discrete levels, we used K-Means clustering with K=4,5,6 and mapped it to the mean curves to inspect the cut-off for each level. From the graphs below, we found that K=5 captured the different segments of the curves and grouped them into levels that best balanced granularity and recognizability. When K=4, some AUs are activated in the neutral range, while K=6 discretizes the levels into too many levels, making it hard to distinguish one from another. 
+                <!-- One thing to note is that all bins similarly grouped neutral (dark blue) and high-intensity (red) sections of the curves; the main differences were in separating the middle expressions.  -->
+                In <a href="#k-means-curves">Figure 5</a>, the blue sections represent the start of a smile, the yellow-orange section represents a smile, and the red corresponds to an open mouth laughing.
                 <div class="my-3 d-flex justify-content-center" id="k-means-curves">
                     <img src="./media/k_means_graphs.jpg" style="width:700px;">
                 </div>
-                <div class="font-italic text-center mb-3">Figure 8: Mean curves with different colouring for clusters detected through k-means clustering, blue is related to neutral and sligh smiles, yellow/orange correlates to visible smiling, and red signifies a high intensity happy face.</div>
+                <div class="font-italic text-center mb-3">Figure 5: Mean curves with different colouring for clusters detected through K-Means clustering, where blue is neutral, yellow/orange is visible smiling, and red is a high intensity smile.</div>
 
-                To answer our first research question, <a href="#happiness-levels">Table 4</a> containing the separated levels and approximate ranges determined from k-means clustering and what the mean curve projected on Apple Face and ValleyGirl looks like at each level. Through the recording study, we determined five distinguishable levels of happiness ranging from neutral to laughter and experimentally estimated the average percentage duration of each level. Additionally, we can confirm that the expression of happiness is non-linear, and the duration between each level is not of equal duration. 
+                <b>To answer our first research question on the levels of happiness</b>, <a href="#happiness-levels">Table 3</a> containing the levels and approximate temporal ranges of the mean AU curve projected on the Apple Face and ValleyGirl models (see Appendix A.3. for how we mapped ARKit blendshapes to ValleyGirl controls). Through the recording study and K-Means clustering, we determined five distinguishable levels of happiness ranging from neutral to laughter and  estimated the average percentage duration of each level. Additionally, we can confirm that the expression of happiness is non-linear, and the duration between each level is not of equal duration. 
                 <div class="my-3 d-flex justify-content-center" id="happiness-levels">
                     <img src="./media/happiness_levels.jpg" style="width:800px;">
                 </div>
-                <div class="font-italic text-center mb-3">Table 4: Levels of happiness with associated encoding names and range obtained through k-means clustering.</div>
+                <div class="font-italic text-center mb-3">Table 3: Levels of happiness and duration ranges (%) obtained through K-Means clustering.</div>
 
             </div>
 
-            <h5>Implementation: Amplifying Emotions Methods</h5>
-            
-                <h6 class="my-2">Naive Static Method</h6>
-                <div class="mb-4">
-                    During the recording study, we recorded participants saying the same speech in neutral and happy tones. By comparing individual AU curves between the two intensities, we saw that the overall trendline of most AUs was similar but raised. Therefore, we initially proposed a naive amplification procedure which adds the difference between the AU activation between the happy speech and neutral speech, as shown by the following equation.
-                    <div class="my-3 d-flex justify-content-center">
-                        <img src="./media/naive_increase_eqn.jpg" style="width:300px;">
-                    </div>
-                    From the graphs shown below in <a href="#naive-static-increase">Figure 9</a>, we added the mean of the Happy (blue) to Neutral (orange) to obtain the adjusted (green) curve. Overall, the amplification matches some of the AUs (e.g. JawOpen   and MouthSmile). However, it underperforms for AUs where neutral has no activation or has a very different shape from its happy counterpart (e.g. BrowDown). 
-                    <div class="my-3 d-flex justify-content-center" id="naive-static-increase">
-                        <img src="./media/naive_increase.jpg" style="width:800px;">
-                    </div>
-                    <div class="font-italic text-center mb-3">Figure 9: AUs for happiness showing a naive static method (green) which raises the values of a neutral speaking recording (orange) up to match the true happy recorded AU shape (blue).</div>
+        <div id="implementation">
+            <h4>4. Implementation: Amplifying Emotions Methods</h4>
+            <div class="mb-4">
+                We introduce two methods of dynamically controlling happiness amplification and dampening in an animated model. While both methods are derived from the data collected from the user study, one achieves it through linear interpolation and the other uses the real mean AU curves to mimic natural non-linearities.
+                <br></br>
 
-                </div>
-                <h6 class="my-2">Naive Linear Method</h6>
+                See <a href="#appendix_naive">Appendix A.3.</a> for an even more basic version of amplification, where the emotion level is modified to a static level without dynamic changes. 
+            </div>
+
+                <h5 class="my-2">4.1. Naive Linear Amplification</h5>
                 <div class="mb-4">
-                    While the naive static method works if we want to amplify a neutral video fully to some consistent level of happiness, it does not capture any dynamic variations in how expressions change moving between different intensities. We propose an upgraded method that enables transitioning between emotion levels.  The naive linear method takes inspiration from Amaya et al. (1996), where we apply a mask of AU curves, like the one seen in the image below, to an input user recorded video  to artificially simulate a gradual progression of happiness. This method involves extracting the desired start and end intensity levels from the Mean AU curves, then linearly interpolating the points in between to match the length of the original video. 
+                    <!-- While the naive static method works if we want to amplify a neutral video fully to some consistent level of happiness, it does not capture any dynamic variations in how expressions change moving between different intensities. We propose an upgraded method that enables transitioning between emotion levels.   -->
+                    The naive linear method takes inspiration from Amaya et al. (1996), where we apply a mask of AU curves, like the one seen in the image below, to an input user recorded video to artificially simulate a gradual progression of happiness. This method involves extracting the desired start and end intensity levels from the Mean AU curves, then linearly interpolating the points in between to match the length of the original video. 
                     <br  /> <br  />
-                    To compensate for videos with an existing baseline level of happiness, we normalize the mask by subtracting the AU activations of the existing level to prevent over-amplification or over-dampening. The baseline level is determined by projecting the average level of activation of the Smile AU (the most deterministic AU according to PCA) to find the closest activation in the Mean AU curves, and categorizing the level. 
-                    The full process is summarized in <a href="#lin-method">Figure 10</a> below.  
+                    To compensate for videos with an existing baseline level of happiness, we normalize the mask by subtracting the AU activations of the existing level to prevent over-amplification or over-dampening. The baseline level is determined by projecting the average level of activation of the MouthSmile AU (the most deterministic AU according to PCA) to find the closest activation in the mean AU curves, and categorizing the level. 
+                    The full process is summarized in <a href="#lin-method">Figure 6</a>.  
 
                     <div class="my-3 d-flex justify-content-center" id="lin-method">
                         <img src="./media/lin_method_detail.jpg" style="width:500px;">
                     </div>
-                    <div class="font-italic text-center mb-3">Figure 10: Example process utilized in our naive linear method to adjust a video to start at a level 2 (slight smile) to level 5 (laughing).</div>
+                    <div class="font-italic text-center mb-3">Figure 6: Example process utilized in our naive linear method to adjust a video to start at a level 2 (slight smile) to level 5 (laughing).</div>
 
                 </div>
-                <h6 class="my-2">Data-Driven Mean Curve Method</h6>
+                <h5 class="my-2">4.2. Data-Driven Mean Curve Amplification</h5>
                 <div class="mb-4">
-                    Similar to the naive linear method, the data-driven method applies a mask to the AUs of a user recorded video; but instead of linear interpolation, we use the mean AU curves obtained from our recording study. The amplification process is similar, we sample the points between the desired start and end levels according to the length of the video and subtract the baseline level of emotion. For dampening, we temporally reverse the curve so that the activations are performed in the reverse order. The process is shown in the image below 
-
-
-                    To provide animators with more control and flexibility, we allow amplification and dampening to be performed on distinct segments within the video, allowing for a mixture of increase and decrease in happiness intensities according to the user's wishes. This is specified through an input control dictionary mapping the progression of the input video with the desired intensity level. For example, a control dictionary of {0:1, 50: 4, 100: 1} means that at between 0-50% of the video, the expression progresses from level 1 to 4, then back down to 1 through the last half of the video 50%-100%. There is no limit of how many control segments that can be implemented. 
-                    A example of the process is shown in <a href="#amp-method">Figure 11</a> below.
+                    Similar to the naive linear method, the data-driven method applies a mask to the AUs of a user recorded video; but instead of linear interpolation, we use the mean AU curves directly obtained from our recording study. The amplification process is similar, we sample the points between the desired start and end levels according to the length of the video and subtract the baseline level of emotion. For dampening, we temporally reverse the curve so that the activations are performed in the reverse order. The process is shown in the n <a href="#amp-method">Figure 7</a>.
                     <div class="my-3 d-flex justify-content-center" id="amp-method">
-                        <img src="./media/amp_method_detail.jpg" style="width:200px;">
+                        <img src="./media/amp_method_detail.jpg" style="width:500px;">
                     </div>
-                    <div class="font-italic text-center mb-3">Figure 11: Example process utilized in our data driven linear method to adjust a video to start at a level 2 (slight smile) to level 5 (laughing).</div>
+                    <div class="font-italic text-center mb-3">Figure 7: Example process utilized in our data driven linear method to adjust a video to start at a level 2 (slight smile) to level 5 (laughing).</div>
+                </div>
 
-                    To answer research question 2 on the amplification pipeline, we summarize our approach as follows: 
+                <h5 class="my-2">4.3. Fine-Tuned Temporal Control</h5>
+                <div class="mb-4">
+                    To provide animators with more control and flexibility, we allow amplification and dampening to be performed on distinct segments within the video, allowing for a mixture of increase and decrease in happiness intensities according to the user's wishes. This is specified through an input control dictionary mapping the progression of the input video with the desired intensity level. For example, a control dictionary of {0:1, 50: 4, 100: 1} means that at between 0-50% of the video, the expression progresses from level 1 to 4, then back down to 1 through the last half of the video 50%-100%. There is no limit of how many control segments that can be implemented and this can be achieved with either amplification method.
+                </div>
+
+                <h5 class="my-2">4.5. Full Amplification Pipeline</h5>
+                <div class="mb-4">
+                    <b>To answer our second research question on the amplification method</b>, we summarize our approach as follows: 
                     <ol>
                         <li>Record video using ARKit and download the blendshape CSV. </li>
                         <li>Manually determine the desired amplification controls (timing and corresponding level of emotion).</li>
                         <li>For each segment specified in the controls, transform the blendshapes using our data-driven Mean AU and process it appropriately (resample, reverse, and subtract baseline).</li>
                         <li>Upload the amplified blendshapes to the desired downstream animation model (Apple Face or ValleyGirl) using our manual mapping system. </li>
                     </ol>
-                    
-                    <b>Pure Amplification</b>
-                    Given an input video of a neutral expression with blinking, we amplified the happiness level from 1 (neutral) to 5 (full grin). The FAS curves of the linear method are straight and artificial, while data-driven produced non-linear and varying results, similar to how real people emote. In the GIF, the temporal activation between linear and data-driven are slightly different frame-by-frame, but not highly obvious. 
-                    In <a href="#neutral-happy-all">Figure 12</a> below, we show the results of amplification using the naive linear and data-driven methods projected on both Apple Face and ValleyGirl.
-                    The FACS curves of the adjusted animations can be seen in <a href="#amp-facs-graphs">Figure 13</a>.
-                    <div class="my-3 d-flex justify-content-center" id="neutral-happy-all">
-                        <img src="./media/nicole_neutral_combined.gif" style="width:650px;">
-                    </div>
-                    <div class="font-italic text-center mb-3">Figure 12: Amplification of happiness using naive linear and data driven methods on a neutral recording.</div>
-                    
-                    <div class="my-3 d-flex justify-content-center" id="amp-facs-graphs">
-                        <img src="./media/nicole_amp_graphs.jpg" style="width:650px;">
-                    </div>
-                    <div class="font-italic text-center mb-3">Figure 13: FACS curves of the AUs amplified using (middle) naive linear and (right) data driven methods.</div>
-
-                    <b>Pure Dampening</b>
-                    We show similar results for dampening, this time from level 5 to 1. Note that our Mean AU curves are reversed this time and the baseline level of happiness (around 4) is subtracted to avoid over exaggerating happiness  at the start.
-                    See <a href="#happy-neutral-all">Figure 14</a> for the animation of dampening and <a href="#damp-facs-graphs">Figure 15</a> for the correlated AU curves.
-                    <div class="my-3 d-flex justify-content-center" id="happy-neutral-all">
-                        <img src="./media/nicole_happy_combined.gif" style="width:650px;">
-                    </div>
-                    <div class="font-italic text-center mb-3">Figure 14: Dampening of happiness using naive linear and data driven methods on a smile recording.</div>
-                    <div class="my-3 d-flex justify-content-center" id="damp-facs-graphs">
-                        <img src="./media/nicole_damp_graphs.jpg" style="width:650px;">
-                    </div>
-                    <div class="font-italic text-center mb-3">Figure 15: FACS curves of the AUs dampened using (middle) naive linear and (right) data driven methods.</div>
-
-                    <b>Mixed Controls</b>
-                    We demo mixed controls by simulating a realistic sentence that requires a change in emotion. The sentence that was said was:
-                    <div class="mx-5 my-2">
-                        <i>
-                        “When I left my house this morning <b style="color:#ebca10;">I saw a cute cat walking across the street </b>
-                        and wasn't paying attention <b style="color:#0090d9;">so bumped into somebody who spilled coffee on me</b>. 
-                        But that person turned out to be <b style="color:#ebca10;">a good friend that I haven't seen in a while</b>.” 
-                        </i>
-                    </div>
-                    This phrase contains different segments which contain different levels of happiness, 
-                    we amplified the first segment in <b style="color:#ebca10;">yellow</b> to around a level of 3, 
-                    then dampened the face for the second segment shown in <b style="color:#0090d9;">blue</b>, 
-                    and then amplified it to a level of 5 at the end for the last part highlighted in <b style="color:#ebca10;">yellow</b>. 
-                    The FACS graphs in <a href="#complex-facs-graphs">Figure 16</a> and rendered results are shown in the video below.
-
-                    <div class="my-3 d-flex justify-content-center">
-                        <video width="700px" controls>
-                            <source src="./media/long_all.mp4" type="video/mp4">
-                          Your browser does not support the video tag.
-                          </video>
-                    </div>
-                    <div class="font-italic text-center mb-3">Video 2: Apple Face and ValleyGirl animated to display amplification and dampening of emotions based on sentiment of the sentence uttered.</div>                    
-                    <div class="my-3 d-flex justify-content-center" id="complex-facs-graphs">
-                        <img src="./media/nicole_long_graphs.jpg" style="width:650px;">
-                    </div>
-                    <div class="font-italic text-center mb-3">Figure 16: FACS curves of the AUs adjusted using (middle) naive linear and (right) data driven methods.</div>
-
-
                 </div>
+            </div>
+        </div>
+        <div id="results">
+            <h4 class="my-2">5. Amplification Results</h4>
+            <div>
+                <h5 class="my-2">5.1. Pure Amplification</h5>
+                Given an input video of a neutral expression with blinking, we amplified the happiness level from 1 (neutral) to 5 (full grin) using our two methods. The FAS curves of the linear method are straight and artificial, while data-driven produced non-linear and varying results, similar to how real people emote. 
+                <!-- In the GIF, the temporal activation between linear and data-driven are slightly different frame-by-frame, but not highly obvious.  -->
+                In <a href="#neutral-happy-all">Figure 8</a>, we show the results of amplification using the naive linear and data-driven methods projected on both Apple Face and ValleyGirl. The temporal activiations are slightly different between the two methods.
+                The FACS curves of the adjusted animations can be seen in <a href="#amp-facs-graphs">Figure 9</a>.
+                <div class="my-3 d-flex justify-content-center" id="neutral-happy-all">
+                    <img src="./media/nicole_neutral_combined.gif" style="width:650px;">
+                </div>
+                <div class="font-italic text-center mb-3">Figure 8: Amplification of happiness using naive linear and data driven methods on a neutral recording.</div>
+                
+                <div class="my-3 d-flex justify-content-center" id="amp-facs-graphs">
+                    <img src="./media/nicole_amp_graphs.jpg" style="width:650px;">
+                </div>
+                <div class="font-italic text-center mb-3">Figure 9: FACS curves of the AUs amplified using (middle) naive linear and (right) data driven methods.</div>
+
+                <h5 class="my-2">5.2. Pure Dampening</h5> 
+                We show similar results for dampening, this time from level 5 to 1. Note that our Mean AU curves are reversed this time and the baseline level of happiness (around 4) is subtracted to avoid over exaggerating happiness  at the start.
+                See <a href="#happy-neutral-all">Figure 10</a> for the animation of dampening and <a href="#damp-facs-graphs">Figure 11</a> for the correlated AU curves.
+                <div class="my-3 d-flex justify-content-center" id="happy-neutral-all">
+                    <img src="./media/nicole_happy_combined.gif" style="width:650px;">
+                </div>
+                <div class="font-italic text-center mb-3">Figure 10: Dampening of happiness using naive linear and data driven methods on a smile recording.</div>
+                <div class="my-3 d-flex justify-content-center" id="damp-facs-graphs">
+                    <img src="./media/nicole_damp_graphs.jpg" style="width:650px;">
+                </div>
+                <div class="font-italic text-center mb-3">Figure 11: FACS curves of the AUs dampened using (middle) naive linear and (right) data driven methods.</div>
+
+                <h5 class="my-2">5.3. Mixed Controls</h5>
+                We demonstrated complex mixed controls by simulating a realistic sentence that requires a change in emotion. The sentence is:
+                <div class="mx-5 my-2">
+                    <i>
+                    “When I left my house this morning <b style="color:#ebca10;">I saw a cute cat walking across the street </b>
+                    and wasn't paying attention <b style="color:#0090d9;">so bumped into somebody who spilled coffee on me</b>. 
+                    But that person turned out to be <b style="color:#ebca10;">a good friend that I haven't seen in a while</b>.” 
+                    </i>
+                </div>
+                This phrase contains different segments which contain different levels of happiness, 
+                we amplified the first segment in <b style="color:#ebca10;">yellow</b> to level 4, 
+                then dampened the face for the second segment shown in <b style="color:#0090d9;">blue</b> to level 1, and then amplified the last part highlighted in <b style="color:#ebca10;">yellow</b> to level 5. 
+                The FACS graphs in <a href="#complex-facs-graphs">Figure 12</a> and rendered results are shown in Video 2. Both the eye and speech movements are well preserved.
+
+                <div class="my-3 d-flex justify-content-center">
+                    <video width="700px" controls>
+                        <source src="./media/long_all.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                      </video>
+                </div>
+                <div class="font-italic text-center mb-3">Video 2: Apple Face and ValleyGirl animated to display amplification and dampening of emotions based on sentiment of the sentence uttered.</div>                    
+                <div class="my-3 d-flex justify-content-center" id="complex-facs-graphs">
+                    <img src="./media/nicole_long_graphs.jpg" style="width:650px;">
+                </div>
+                <div class="font-italic text-center mb-3">Figure 12: FACS curves of the AUs adjusted using (middle) naive linear and (right) data driven methods.</div>
+
+
+            </div>
         </div>
         <div id="perc-study">
-            <h4 class="mt-5 mb-2">Perceptual Study: Detect Emotion Intensities and Amplification Preferences</h4>
+            <h4 class="mt-5 mb-2">6. Perceptual Studies</h4>
             <div class="mb-4">
-                Our goal for the perceptual study is two-fold: 1) we wanted to validate our initial happiness level discretization, and b) compare the naive linear method with our data-driven approach. Although we used different quantitative analysis techniques to determine the different happiness levels, our results were not tested on human participants who were not trained in identifying FACS and had knowledge of facial animation. 
+                Our goal for the perceptual study is two-fold: Study 1) we wanted to validate our happiness level discretization, and Study 2) compare the naive linear method with the mean AU driven aproach. We ran the experiments for one week and recruited 36 participants (n=36). Both studies were delivered one after the other as multiple choice and open-text survey questions through a <a href="https://forms.gle/ik2t7jJTqqxDCbJ99" target="blank">Google Form</a> (click to open). 
+                <!-- Although we used different quantitative analysis techniques to determine the different happiness levels, our results were not tested on human participants who were not trained in identifying FACS and had knowledge of facial animation.  -->
             </div>
+            <h5 class="my-2">6.1. Study 1: Emotion Intensity Detection</h5>
+                <h6 class="my-2">6.1.1. Methodology</h6>
                 <div class="mb-4">
-                    <b>Study 1</b>
-                    The first part of our perceptual study involved a forced two-choice test for distinguishing differences between different levels of happiness expressed on animated faces. We showed our participants every combination of images with two faces, each exhibiting a different level of happiness, and had them select the one they perceived to be happier. We compared faces created with our Mean AU curve  with a "ground truth" created from a single human actor's video. The faces used in our experiment are shown in <a href="#perc-study-faces">Table 5</a> below; due to the differences in how the faces are animated in the Mean AU versus the ground truth, we did not have participants compare the mean and ground directly. Due to Valleygirl's AU mapping being unreliable at this stage of the experiment (e.g., full happiness looked like grimacing), we went forth with only the Apple Face. To prevent order and learning effects, we randomized the order of all the faces and position order within each question. 
+                    We set up a forced two-choice test for differentiating between different levels of happiness expressed on animated faces. Participants are shown pairwise renderings exhibiting a different level of happiness and were instructed to select the one they perceived to be happier. We run this test for both faces created with our mean AU curves, as well as a "ground truth" set of curves created from a single human actor's video. The faces used in our experiment are shown in <a href="#perc-study-faces">Table 4</a> below. We use all permutations of pairings of Apple Face, and omit ValleyGirl due to unreliable results at this stage.
+
+                     <!-- due to the differences in how the faces are animated in the Mean AU versus the ground truth, we did not have participants compare the mean and ground directly. Due to Valleygirl's AU mapping being unreliable at this stage of the experiment (e.g., full happiness looked like grimacing), we went forth with only the Apple Face.  -->
+                     To prevent order and learning effects, we randomized the order of all the faces and position order within each question. 
 
                     <div class="my-3 d-flex justify-content-center" id="perc-study-faces">
                         <img src="./media/perceptual_study_levels.jpg" style="width:750px;">
                     </div>
-                    <div class="font-italic text-center mb-3">Table 5: Static images of each discrete level of happiness animated using an actor capture (ground truth) and mean AU curves (mean AUs).</div>
+                    <div class="font-italic text-center mb-3">Table 4: Static images of each discrete level of happiness animated using an actor capture (ground truth) and mean AU curves (mean AUs).</div>
+                </div>
+                <h6 class="my-2">6.1.2. Results</h6>
+                <div class="mb-4">
+                    Our results for differentiating discrete levels of emotions were similar to the results obtained by Yu et al. (2012); our participants' accuracy was 96.8% (697 correct out of 720 total questions answered). 
+                    <!-- Some of the errors made by participants may have been clicking errors; for example, one participant chose level 1 over 5 to express higher happiness levels. However, for the other entries that were not due to human error,  -->
+                    <!-- We found that the most frequently wrong levels were different for the faces generated by the mean curve and those generated by the ground truth.  -->
+                    We found that errors associated with mean AU curve generated images (total count=7)  involve level 3, which we code as a “genuine smile.” Participants confused level 3 with level 2 and level 5. Level 2 is likely due to the similarity in activated AUs; however,  level 5 may be due to a difference in perception of what happiness looks like in animated faces. Participants may perceive an exaggerated laughing face as more sinister and angry than a gentler smile. For the ground truth images, the errors (total count=9) are associated with level 4, which we code as "grin". Unlike mean AU curves, the errors seem likely due to the closeness of the two levels in intensity levels. The errors also suggest that participants do not always perceive an open mouth (activation of JawOpen, AU 26) as more happy. 
+                    <br></br>
+                    Overall, there is no significant difference between the perception of different intensity levels between mean curves and ground truth. Therefore, this suggests that our mean curves perform as well as a capturing emotions from a real person in the context of modelling levels of happiness. <a href="#perc-study-errors">Table 5</a> below summarizes the errors and provides correlated images for the emotion levels. 
+                    <div class="my-3 d-flex justify-content-center" id="perc-study-errors">
+                        <img src="./media/perceptual_study_errors.jpg" style="width:550px;">
+                    </div>
+                    <div class="font-italic text-center mb-3">Table 5: Errors made by participants during study 1 where they were asked to determine the happier looking face.</div>
 
                 </div>
+
+                <h5 class="my-2">6.2. Study 2: Amplification Method Preference</h5> 
+                <h6 class="my-2">6.2.1. Methodology</h6>
                 <div class="mb-4">
-                <b>Study 2</b>
-                
-                    In the second part of our study we examined the perceived realism and preference of the two amplification methods, linear and data driven. We showed participants two types of animations for amplification and dampening conditions:
+                    In the second part of the perceptual study, we examined participants' preference of the two amplification methods, linear and data driven. We showed participants two types of animations for amplification and dampening conditions:
                     <ul>
-                        <li>Still faces amplified/dampened to maximum/minimum happiness</li>
-                        <li>Speaking faces amplified/dampened to maximum/minimum happiness</li>
+                        <li>Still faces [amplified/dampened] to [maximum/minimum] happiness (1 video).</li>
+                        <li>Speaking faces [amplified/dampened] to [maximum/minimum] happiness (5 videos, each from a different person from the recordng study).</li>
                     </ul>
-                    We ran our study for over a week through Google Forms, gathering 36 responses (N=36). We had a total of 1 static video and five talking videos. 
-                    Similar to the first part of the study, we had a forced choice for each question. Still, we added a free response at the end to gather insight 
-                    into what features on the face or elements of the animation the participants were considering when choosing their preferred face. 
-                    Some examples of the data-driven amplified and dampened talking faces shown to participants are shown in <a href="#mean-animations">Figure 17</a>.
+                    <!-- We ran our study for over a week through Google Forms, gathering 36 responses (N=36). We had a total of 1 static video and five talking videos.  -->
+                    Similar to the previous study, we had a forced choice for each question. We also added a free response at the end to gather insight into what features on the face or elements of the animation the participants were considering when choosing their preferred face. 
+                    Two examples of the data-driven amplified and dampened faces are shown in <a href="#mean-animations">Figure 13</a>.
                     <div class="my-3 d-flex justify-content-center" id="mean-animations">
                         <img src="./media/nicole_neutral_AMP.gif" style="width:250px;">
                         <img src="./media/nicole_smile_AMP.gif" style="width:250px;">
                     </div>
-                    <div class="font-italic text-center mb-3">Figure 17: Face animation (left) amplified from neutral to laughing and (right) dampened from laughing to neutral using our data-driven mean curves.</div>
+                    <div class="font-italic text-center mb-3">Figure 13: Face animation (left) amplified from neutral to laughing and (right) dampened from laughing to neutral using our data-driven mean curves.</div>
 
                 </div>
+                <h6 class="my-2">6.2.2. Results</h6>
 
-            <h5>Results</h5>
-                <h6 class="my-2">Differentiating Emotion Levels</h6>
                 <div class="mb-4">
-                    Our results for differentiating discrete levels of emotions were similar to the results obtained by Yu et al. (2012); our participants' accuracy was 96.8% (697 correct out of 720). Some of the errors made by participants may have been clicking errors; for example, one participant chose level 1 over 5 to express higher happiness levels. However, for the other entries that were not due to human error, we found that the most frequently wrong levels were different for the faces generated by the mean curve and those generated by the ground truth. We found that errors associated with mean curve generated images (Total Count=7) mainly involve level 3, which we encode as a “genuine smile.” Participants confused level 3 with level 2 and level 5. Level 2 is likely due to the similarity in activated AUs; however, with level 5, it may be due to a difference in perception of what happiness looks like. Participants may perceive an exaggerated laughing face as more sinister and angry than a gentler smile. For the ground truth-based errors (Total Count=9), the errors are associated with level 4. Unlike mean curves, the errors seem likely due to the closeness of the two levels in intensity levels. The errors also suggest that participants do not always perceive " open mouth " as more happy. Overall, there is no significant difference between the perception of different quantized levels between mean and ground truth. Therefore, this suggests that our mean curves perform well enough as an equivalent to the ground truth in the context of modelling levels of happiness. <a href="#perc-study-errors">Table 6</a> below summarizes the errors and provides correlated images for the emotion levels. 
-                    <div class="my-3 d-flex justify-content-center" id="perc-study-errors">
-                        <img src="./media/perceptual_study_errors.jpg" style="width:550px;">
-                    </div>
-                    <div class="font-italic text-center mb-3">Table 6: Errors made by participants during study 1 where they were asked to determine the happier looking face.</div>
-
-                </div>
-                <h6 class="my-2">Comparison of Amplification Methods</h6>
-                <div class="mb-4">
-                    We compared different amplification methods to evaluate the best method for amplifying happiness in videos and whether introducing non-linearity is preferred. From the second part of our perception study, we found that the mean preference rate is the same for both methods. The distribution of the preference rate can be seen in <a href="#violin-results">Figure 18</a> below.
+                    For each participant, we compute their overall preference for either method and plot the distribution in <a href="#violin-results">Figure 13</a>. Both method achieve approximately the same mean preference rate, but with different distributions. The data shows that there were people who preferred the data-driven method at a high rate (>80%) than there were people who preferred the linear method at a high rate. This could suggest that people who prefer the non-linearity in their animation will keep seeking it out in the animated faces. However, the average participant (mode) favoured the linear method slightly more, choosing it at between 50-60% of the time.
                     <div class="my-3 d-flex justify-content-center" id="violin-results">
                         <img src="./media/violin_plots.jpg" style="width:400px;">
                     </div>
-                    <div class="font-italic text-center mb-3">Figure 18: Participant preference as percentages aggregated and seperated to compare their opinions on the data-driven method vs linear method.</div>
+                    <div class="font-italic text-center mb-3">Figure 13: Participant preference as percentages aggregated and seperated to compare their opinions on the data-driven method vs linear method.</div>
 
-                    As seen from  the plot, most participants chose the data-driven method around 40% to 50% of the time and the linear method 50% to 60%. More people chose the data-driven option more frequently, at a probability of >80%, compared to linear, which has its distribution assembled at one point. This could suggest that people who prefer the non-linearity in their animation will keep seeking it out in the animated faces.
-                    <br  /> <br  />
-                    The open-ended responses gave us insight into what participants felt were the most essential features. After performing thematic coding of the responses, we extracted four main points: rate of change (11/36), smoothness (10/36), coordination of eyes and mouth (8/36), and over exaggeration (6/36). We found that people look for fluid movements with fewer moving features, explicitly looking for the gradual speed of emotions appearing on the face. When watching the eyes and the mouth, they paid attention to the eyes matching the mouth movement and coordination in the facial muscles. They noted that animations that provided complete facial movements where all muscles were engaged simultaneously were preferred. Additionally, the rate of change in the expression has to be more constant. The last feature participants often mentioned was picking animations that avoided over-exaggeration. They felt that if the movement were too big, it would feel unnatural. In addition to these results, 11/36 people also indicated they either perceived very little differences or could not articulate what they were looking for, e.g. going by instinct instead. 
+                    <!-- As seen from  the plot, most participants chose the data-driven method around 40% to 50% of the time and the linear method 50% to 60%. More people chose the data-driven option more frequently, at a probability of >80%, compared to linear, which has its distribution assembled at one point. This could suggest that people who prefer the non-linearity in their animation will keep seeking it out in the animated faces. -->
+                    The open-ended responses gave us insight into what participants felt were the most essential features. After performing thematic coding of the responses, we extracted four main points: rate of change (11/36), smoothness (10/36), coordination of eyes and mouth (8/36), and over exaggeration (6/36). We found that people look for fluid movements with fewer moving features, explicitly looking for the gradual speed of emotions appearing on the face. When watching the eyes and the mouth, they paid attention to the eyes matching the mouth movement and coordination in the facial muscles. They noted that animations that provided complete facial movements where all muscles were engaged simultaneously were preferred. Additionally, the rate of change in the expression should be consistent and animations should avoid over-exaggeration. They felt that if the movement were too big, it would feel unnatural. In addition to these results, 11/36 people also indicated they either perceived very little differences or could not articulate what they were looking for, e.g. going by instinct instead. 
                     <br  /> <br  />
                     These results explain why the naive linear amplification was often chosen. Linear amplification provides the gradual and smooth transition that many participants who are untrained in animation feel is the crucial aspect of replicating realism. Additionally, although the synchronized rate of change does not reflect the nonlinearity present in actual human expressions, people tend to perceive emotions as linear stages where the progression between one level of happiness is linearly correlated with the next. Moreover, our data-driven method generally reaches full peaks faster than the linear method, as some AUs have steep slopes. This may be perceived as “choppiness” and “over-exaggeration” by some participants.
                     </div>
                 </div>
+
         <div id="discussion">
-            <h4 class="mt-5 mb-2">Discussion</h4>
+            <h4 class="mt-5 mb-2">6. Discussion and Conclusion</h4>
+            <h5 class="mb-2">6.1. Summary of Contributions</h5>
+            <div class="mb-4">
+                In this work, we make both <b>technical</b> and <b>empirical</b> contributions. We implement a method for customizable emotion control for animation models that preserves speech and eye movements. To answer our two research questions, we demonstrate proof-of-concept with two animation models (simple and realistic) with 5 levels of happiness. Finally, we conducted perceptual testing that a) confirms people can recognize levels of happiness in animation models, and b) uncovers that people are not sensitive to realistic expression dynamics.
+            </div>
+
+            <h5 class="mb-2">6.2. Perception of Emotion in Animated Models</h5>
             <div class="mb-4">
                 Through quantitative analysis of recordings of human expressions of happiness, we were able to identify five discrete levels of happiness and show that the expression of happiness is nonlinear in nature. The different levels of happiness correlate to neutral, slight smile, genuine smile, grin, and laughter. Additionally, we showed that each level of happiness has a different duration when a face moves from a neutral expression to complete laughter. Moreover, through perceptual tests, we confirmed that people recognize each level as distinct, even in less realistic human faces. In future work, we would increase the number of levels to obtain a more precise discretization of happiness levels.
                 <br  /><br  />
-                Our project also showed that despite our prior hypothesis that people prefer more realistic nonlinear displays of emotions, people are not as sensitive to realistic facial movements for animated faces. The two proposed happiness amplification methods, naive linear and data-driven, were equally preferred by participants in our perceptual study. This finding suggests that linear amplification methods may be sufficient if data for mean curves are not readily available or is inefficient to sample. However, this result could also be due to some limitations of our animated faces since we used less realistic faces like Apple Face. We will discuss limitations that resulted in our choice of using Apple Face. 
+                Our project also showed that despite our prior hypothesis that people prefer more realistic nonlinear displays of emotions, people are not as sensitive to realistic facial movements for animated faces. The two proposed happiness amplification methods, naive linear and data-driven, were equally preferred by participants in our perceptual study. This finding suggests that linear amplification methods may be sufficient if data for mean curves are not readily available or is inefficient to sample. 
+                <!-- However, this result could also be due to some limitations of our animated faces since we used less realistic faces like Apple Face. We will discuss limitations that resulted in our choice of using Apple Face.  -->
             </div>
-            <h5>Animation Transfer Limitations</h5>
-            <div class="mb-4">
-                There were limitations due to the lack of one-to-one mapping of Apple Face and ValleyGirl blendshapes, making it challenging to transfer the emotions recorded using ARKit onto ValleyGirl. The differences in the neutral values needed to be manually hardcoded, which was iterated through many revisions to determine the best possible mapping. Below is a video explaining the problems we encountered during the initial testing of anger expressions due to the problems that arose with unnatural-looking angry expressions during the participant study. We decided not to use the data collected for anger due to this, and also general difficulties for untrained actors to strongly express anger. Instead our project would focus on expressions of happiness. Below is a video showing a problem with transfering blendshapes weights from the ARKit aligned Apple Face to ValleyGirl. 
-                <div class="my-3 d-flex justify-content-center" id="problems-w-mouth">
-                    <video width="700px" controls>
-                        <source src="./media/p3_problems_w_mouth.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                      </video>
-                </div>
-                <div class="font-italic text-center mb-3">Video 1: Sample recording from our recording study of a participant going from a neutral face to full smile</div>
-                Additionally, we encountered some problems with head tracking in ARKit and capturing FACS curves when people were laughing. As laughing often involves movements of the head and body, the captured curves look chaotic, and the mapped expressions do not mirror the expression of the human actor perfectly. For example, <a href="#laughing-problems">Figure 19's</a> top graph shows a participant's correlated FACS curve showing the activated AUs when they are laughing. Then, the bottom of <a href="laughing-problems">Figure 19</a> show the captured video and modelled facial expressions obtained through ARKit. 
-                <div class="my-3 d-flex justify-content-center" id="laughing-problems">
-                    <img src="./media/p2_laughing_facs.png" style="width:300px;">
-                </div>
-                <div class="my-3 d-flex justify-content-center">
-                    <img src="./media/p2_gif.gif" style="width:200px;"><img src="./media/p2_happy_appleface.gif" style="width:200px;"><img src="./media/p2_happy_jali.gif" style="width:200px;">
-                </div>
-                <div class="font-italic text-center mb-3">Figure 19: A participant's (top) FACS AU curves recorded during a video with laughing, with (bottom) the corresponding video and animation mapping results.</div>
-                The reason for our usage of Apple Face is one part due to study continuity from study 1 in the perceptual study to study 2, and the other part is due to the subpar animation of the more realistic ValleyGirl model. We could not obtain a good mapping of the face by the time of the perceptual study, and from some pilot testing, we found that people perceived the animated ValleyGirl smiling images as more eerie and surprised. To avoid people being distracted by the uncanny valley of the animated ValleyGirl, we chose to use Apple Face, which is animated and more faithful to the ARKit recordings. One solution we found, slightly too late for the perceptual study, is to reduce the number of transferred blend shape values. We found that including all the mouth movements led to exaggerated motions. Some of the blendshapes that were excluded include:
-                <ul>
-                    <li>JawRight and JawLeft</li>
-                    <li>MouthRollUpper and MouthRollLower</li>
-                    <li>BrowOuterUpRight and BrowOutperUpLeft</li>
-                    <li>MouthFunnel</li>
-                    <li>MouthFrownRight and MouthFrownLeft</li>
-                </ul>
-                Excluding these left us with less accurate mouth movement which does not perfectly match with the phonetics of the words spoken, however the general movement of the mouth still matches the words spoken. 
-            </div>
-        </div>
+
+<!--         </div>
         <div id="conclusion">
-            <h4>Conclusion</h4>
+            <h4>7. Conclusion</h4>
+            <div class="mb-4"> -->
+                
+            <h5 class="mb-2">6.3. Limitations and Future Steps</h5>
             <div class="mb-4">
-                We developed a customized emotion control for animation models that preserves speech and eye movements. To answer our second research question, we demonstrate proof-of-concept with two animation models (realistic and artificial) with the 5 levels of happiness. Finally, we conducted perceptual testing that a) confirms people can recognize levels of happiness in animation models, and b) uncovers that people are not sensitive to realistic expression dynamics.
-                <br /><br />
-                The next step of our study is to validate the tool with animators, once a functional UI of amplification controls can be implemented in Maya. Through participatory design sessions and UI testing, we can work with animators to improve the utility of emotion controls. Due to the time constraint of this project, we could only explore the levels of happiness. However, future work could build off this to explore the different levels of anger, surprise, fear, disgust, and sadness. Moreover, since our project focuses on the amplification of emotion, matching mouth movement to the words is out of scope. However, future work can explore the synchronization of mouth movements in a more realistic manner. Overall, our project used holistic and empirical methods to determine the different levels of happiness expressed by human faces.
-            </div>
+                Due to time constraints, we could only explore the levels of happiness. However, future work could build off this to explore anger, surprise, fear, disgust, and sadness and incorporate more granular levels of emotion intensities. This offers a toolset of more diverse emotional control for animators. We can also extend the first perceptual study to determine the exact perceptual thresholds of each emotion, similar to Yu et al. (2012), except in animation models. 
+                <br></br>
+                While our method preserves speech reasonably well, small artifacts (such as lips not closing) can still appear. The timing of the emotion amplification/dampening also may not fit in with speech. Future work can explore using deep learning to drive the synchronization of mouth movements in a more realistic manner and detecting mismatches between expressions and speech. 
+                <br></br>
+                A limitation in the ValleyGirl animation model is a lack of ground truth mappings to the ARKit blendshapes, thus requiring a significant amount of effort to manually map. As iterative refinements were time-consuming, the ValleyGirl model was unfortunately not ready for the perceptual studies. We theorize that the results could be confounded by our usage of a non-realistic model (Apple Face), so redoing the study with ValleyGirl can be insightful.
+                The final blendshape mappings can be found in our <a href="https://github.com/zxnnic/amplifying-emotion/blob/main/code/maya_snippets/amplify_emotions_code.ipynb" target="blank">code</a>. Further technical details about the mapping are given in <a href="#appendix_mapping">Appendix A.4</a>.
+                <br></br>
+                Lastly, a future extension of our study is to validate the tool with animators, once a functional UI of amplification controls can be implemented in Maya. We can work with animators to improve the utility of emotion controls through participatory design sessions and UI testing. This enables the verification that the full workflow is suitable for animation requirements. 
+             </div>
         </div>
+
         <div id="ref">
             <h4 class="mt-5 mb-2">Reference</h4>
             <ol>
@@ -403,6 +445,88 @@
                 <li>Zhang, S., Liu, X., Yang, X., Shu, Y., Liu, N., Zhang, D. and Liu, Y.J. (2021). The influence of key facial features on recognition of emotion in cartoon faces. Frontiers in psychology, 12, p.687974.</li>
 
             </ol>
+        </div>
+        <div id="appendix">
+            <h4 class="mt-5 mb-2">Appendices</h4>
+
+            <h5 class="mb-2">A.1. Modelling AUs for Happiness</h4>
+            <div class="mb-4" id="appendix_pilot">
+<!--                 For this project, we are using existing facial mapping technology (Apple's ARKit), as facial landmark detection is a nontrivial task. Prior works (Sayette et al., 2001; Spencer-Smith et al., 2001; Yu et al., 2013) have performed perceptual studies to determine which AU activation induces the perception of each of the six basic emotions. While the literature identifies relevant AUs to target, they do not specify the value for activation or define the path of movement of each AUs. There are some FACS curved shown in Yu et al. (2013), however, from our review of literature, there does not seem to be a standard curve for “happiness”. Additionally, there is no one-to-one mapping of blendshapes available from ARKit outputs and FACS. Therefore as an initial prototyping step, we attempt to create mapping of blendshapes from ARKit to FACS using Chris Landreth's lecture slides (Landreth, 2023), and to downstream animation models using open-source resources and manual mapping to serve as a foundation to subsequent analysis and emotion amplification. We perform this for Anger and Happiness, which are two of the strongest expressions, and the results are summarized in <a href="#happy-facs">Table 2</a>.  -->
+
+                As apart of the pilot study, we manually modelled different levels of happiness in our two animation models to validate if the AUs from literature and Chris Landreth's lecture slides (Landreth, 2023) could sufficiently generate believable fappy faces. See <a href="#happy-modelled">Figure 14 </a> for a progression from neutral, to smile, to joy. 
+                <div class="mt-3 row d-flex justify-content-center" id="happy-modelled">
+                    <img src="./media/pilot_smile.png" style="width:700px;">
+                </div>
+                <div class="font-italic text-center mb-3" >Figure 14: Manually generated levels of happiness in Apple Face and ValleyGirl. </div>
+
+            </div>
+
+            <h5 class="mb-2" >A.2. Raw FACS Curves from User Study</h4>
+            <div class="mb-4" id="appendix_raw">
+                <a href="#facs-curve-happy">Figure 15</a> below shows the FACS curve of each identified AU for the participants' happiness. 
+                <div class="my-3 d-flex justify-content-center" id="facs-curve-happy">
+                    <img src="./media/facs_curves_happy.png" style="width:850px;">
+                </div>
+                <div class="font-italic text-center mb-3">Figure 15: un-aligned FACS curves of the happy AUs of all recording study participants.</div>
+            </div>
+            <!-- <div id="extraction"> -->
+
+             <h5 class="my-2">A.3. Naive Static Method</h5>
+                <div class="mb-4" id="appendix_naive">
+                    During the recording study, we recorded participants saying the same speech in neutral and happy tones. By comparing individual AU curves between the two intensities, we saw that the overall trendline of most AUs was similar but raised. Therefore, we initially proposed a naive amplification procedure which adds the difference between the AU activation between the happy speech and neutral speech, as shown by the following equation.
+                    <div class="my-3 d-flex justify-content-center">
+                        <img src="./media/naive_increase_eqn.jpg" style="width:300px;">
+                    </div>
+                    From the graphs shown below in <a href="#naive-static-increase">Figure 15</a>, we added the mean of the Happy (blue) to Neutral (orange) to obtain the adjusted (green) curve. Overall, the amplification matches some of the AUs (e.g. JawOpen and MouthSmile). However, it underperforms for AUs where neutral has no activation or has a very different shape from its happy counterpart (e.g. BrowDown). 
+                    <div class="my-3 d-flex justify-content-center" id="naive-static-increase">
+                        <img src="./media/naive_increase.jpg" style="width:800px;">
+                    </div>
+                    <div class="font-italic text-center mb-3">Figure 15: AUs for happiness showing a naive static method (green) which raises the values of a neutral speaking recording (orange) up to match the true happy recorded AU shape (blue).</div>
+
+                </div>
+
+        
+            <h5 class="mb-2">A.4. ValleyGirl Mapping Limitations</h5>
+
+            <div class="mb-4" id="appendix_mapping">
+                There were limitations due to the lack of one-to-one mapping of Apple Face and ValleyGirl blendshapes, making it challenging to transfer the emotions recorded using ARKit onto ValleyGirl. The differences in the neutral values needed to be manually hardcoded, which was iterated through many revisions to determine the best possible mapping. 
+
+                <a href="#problems-w-mouth">Video 3</a> demonstrates the problems we encountered during the initial testing of anger expressions due to the problems that arose with unnatural-looking angry expressions during the participant study. We decided not to use the data collected for anger due to this, and also general difficulties for untrained actors to strongly express anger. 
+                <!-- Below is a video showing a problem with transfering blendshapes weights from the ARKit aligned Apple Face to ValleyGirl.  -->
+
+                <!-- <div class="mt-3 d-flex justify-content-center" id="happy-facs">
+                    <img src="./media/table3_happy.jpg" style="width:500px;">
+                </div>
+                <div class="font-italic text-center mb-3">Table 2: Action units with activation percentage at different intensities of happiness and their corresponding JALI and Apple Face blendshape names.</div> -->
+
+                <div class="my-3 d-flex justify-content-center" id="problems-w-mouth">
+                    <video width="700px" controls>
+                        <source src="./media/p3_problems_w_mouth.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                      </video>
+                </div>
+                <div class="font-italic text-center mb-3">Video 3: Sample recording from our recording study of a participant going from a neutral face to full smile</div>
+                
+              <!--   Additionally, we encountered some problems with head tracking in ARKit and capturing FACS curves when people were laughing. As laughing often involves movements of the head and body, the captured curves look chaotic, and the mapped expressions do not mirror the expression of the human actor perfectly. For example, <a href="#laughing-problems">Figure 19's</a> top graph shows a participant's correlated FACS curve showing the activated AUs when they are laughing. Then, the bottom of <a href="laughing-problems">Figure 19</a> show the captured video and modelled facial expressions obtained through ARKit. 
+                <div class="my-3 d-flex justify-content-center" id="laughing-problems">
+                    <img src="./media/p2_laughing_facs.png" style="width:300px;">
+                </div>
+                <div class="my-3 d-flex justify-content-center">
+                    <img src="./media/p2_gif.gif" style="width:200px;"><img src="./media/p2_happy_appleface.gif" style="width:200px;"><img src="./media/p2_happy_jali.gif" style="width:200px;">
+                </div>
+                <div class="font-italic text-center mb-3">Figure 19: A participant's (top) FACS AU curves recorded during a video with laughing, with (bottom) the corresponding video and animation mapping results.</div> -->
+
+                The reason for our usage of Apple Face was due to the subpar animation of the more realistic ValleyGirl model at the time of the perceptual study. From some pilot testing, we found that people perceived the animated ValleyGirl smiling images as  eerie and surprised. To avoid people being distracted by the uncanny valley of the animated ValleyGirl, we chose to use Apple Face, which is animated and more faithful to the ARKit recordings. One solution we found, slightly too late for the perceptual study, is to reduce the number of transferred blend shape values. We found that including all the mouth movements led to exaggerated motions. Some of the blendshapes that were excluded include:
+                <br></br>
+                <ul>
+                    <li>JawRight and JawLeft</li>
+                    <li>MouthRollUpper and MouthRollLower</li>
+                    <li>BrowOuterUpRight and BrowOutperUpLeft</li>
+                    <li>MouthFunnel</li>
+                    <li>MouthFrownRight and MouthFrownLeft</li>
+                </ul>
+                Excluding these left us with less accurate mouth movement which does not perfectly match with the phonetics of the words spoken, however the general movement of the mouth still matches the words spoken. 
+            </div>
         </div>
     </div>
   </body>
