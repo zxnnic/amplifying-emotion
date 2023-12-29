@@ -50,7 +50,7 @@ KNOWN_AUS = {"timecode":[],"blendshapecount":[],
 }
 KNOWN_AUS = KNOWN_AUS.keys()
 
-FILENAME = "./inputs/nicole_neutral.csv"
+FILENAME = "./inputs/class_demo_LIN.csv"
 OUT_PATH = "./outputs/"
 
 # Read target video's ARKit blendshapes.
@@ -59,4 +59,4 @@ for col in neutral.columns:
   if col.lower() not in KNOWN_AUS:
     neutral.drop(col, axis=1, inplace=True)
 
-neutral.to_csv(OUT_PATH+"nicole_neutral.csv", index=False)
+neutral.to_csv(OUT_PATH+"class_demo_LIN.csv", index=False)
